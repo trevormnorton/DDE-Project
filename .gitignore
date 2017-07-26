@@ -1,0 +1,10 @@
+
+*.gz
+
+*.aux
+
+*.log
+
+*.out
+
+DDE-Project-Master.pdf
