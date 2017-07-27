@@ -1,0 +1,135 @@
+%!TEX root = ../DDE-Project-Master.tex
+
+\section{Uniform Equicontinuity of Galerkin Solutions}
+
+\subsection{Initial Lemmas}
+
+\bl
+The following convergences hold:
+\be\label{conv1}
+    \lim_{N\to\infty} [u_N(\cdot)]^D(-\tau) = [u(\cdot)]^D(-\tau) \text{ with respect to } L^2([0,T];\mathbb R),
+\ee
+and 
+\be\label{conv2}
+    \lim_{N\to\infty} \mcF (u_N(\cdot)) = \mathcal F(u(\cdot))\text{ with respect to } L^1([0,T]; \mcH).
+\ee
+\el
+
+\bp
+Note that 
+\bea
+    \int_0^T \left| [u_N(s)]^D(-\tau) - [u(s)]^D(-\tau) \right|^2 \d s &\leq \sum_{k=0}^m \int_{-\tau}^0 \left| [u_N(k\tau)]^D(\theta) - [u(k\tau)]^D(\theta) \right|^2\d\theta  \\
+    &  \hspace{1.5em} +  \int_{-\tau}^0 \left| [u_N(T)]^D(\theta) - [u(T)]^D(\theta) \right|^2 \d\theta.
+\eea
+In other words, 
+\bea\label{unineq}
+    \left\| [u_N(\cdot)]^D(-\tau) - [u(\cdot)]^D(-\tau) \right\|^2_{L^2([0,T];\mathbb R)} &\leq \sum_{k=0}^m \left\| [u_N(k\tau)]^D - [u(k\tau)]^D \right\|^2_{L^2([0,T];\mathbb R)} \\
+    &  \hspace{1.7em} +  \left\| [u_N(T)]^D- [u(T)]^D \right\|^2_{L^2([0,T];\mathbb R)}.
+\eea
+It has been shown that \(\|[u_N(t)]^D - [u(t)]^D]\|_{L^2([0,T];\mathbb R)} \to 0\) as \(N\to\infty\) for any \(t\in[0,T]\). This gives that the right side of \eqref{unineq} converges to \(0\) as \(N\to\infty\), and thus the left side of \eqref{unineq} also converges to \(0\) as \(N\to\infty\). This proves \eqref{conv1}. 
+
+To prove the other convergence, note that 
+\bea
+    \int_0^T \|\mathcal F(u_N(s)) - \mathcal F(u(s)) \|_{\mathcal H} \d s &= \int_0^T \left| f\left([u_N(s)]^D(-\tau)\right) - f\left([u(s)]^D(-\tau)\right)\right|\d s \\
+    &\leq L \int_0^T \left| [u_N(s)]^D(-\tau)- [u(s)]^D(-\tau)\right|\d s \\
+    &=L \| [u_N(\cdot)]^D(-\tau)- [u(\cdot)]^D(-\tau) \|_{L^1([0,T];\mathbb R)}.
+\eea
+Noting that \(L^2([0,T];\mathbb R)\) is continuously embedded in \(L^1([0,T];\mathbb R)\) and applying \eqref{conv1} proves that \eqref{conv2} holds.
+\ep
+
+\subsection{Uniform Equicontinuity}
+
+\bt
+The sequence of functions \(\{u_N\}_{N=0}^\infty\), where 
+\be
+    u_N : [0,T] \mapsto \mathcal H, \qquad N\in\mathbb N_0,
+\ee 
+is uniformly equicontinuous. 
+\et
+
+\bp
+Suppose \(t_0,t_1\in [0,T]\) and \(t_0 \leq t_1\). Denote \(\delta_0 := t_1 - t_0\). Applying the variation-of-constants formula, we have that for \(N\in\mathbb N_0\)
+\bea
+    \|u_N(t_0) - u_N(t_1)\|_{\mathcal H} &\leq \underbrace{\|(T_N(t_0) - T_N(t_0 + \delta))\Pi_N u_0\|_{\mathcal H}}_{\RN1(\delta, N)}  \\
+    &+ \underbrace{\left\| \int_0^{t_0} [T_N(t_0-s) - T_N(t_0+\delta -s)]\Pi_N\mathcal F(u_N(s))\d s \right\|_{\mathcal H}}_{\RN2(\delta, N)} \\
+    &+ \underbrace{\left\| \int_{t_0}^{t_0+\delta} T_N(t_0+\delta-s)\Pi_N\mathcal F(u_N(s))\d s \right\|_{\mathcal H}}_{\RN3(\delta, N)}.
+\eea
+We show that for each of these terms, the dependence on \(\delta\) and \(N\) can be separated. %Rewrite this
+\begin{enumerate}[label=\textbf{\Roman*}., itemsep=5ex]
+
+\item We have that 
+\bea
+    \RN1(\delta, N) &= \| T_N(t_0)(I - T_N(\delta))\Pi_N u_0\|_\mcH \\
+    &\leq Me^{\omega t_0} \| (I - T_N(\delta))\Pi_N u_0\|_\mcH \\
+    &= Me^{\omega t_0} \|(\Pi_N - T_N(\delta)\Pi_N) u_0\|_\mcH \\
+    &\leq Me^{\omega t_0} \|(I- T_N(\delta)\Pi_N) u_0\|_\mcH \\
+    &\leq Me^{\omega T} \|(I- T_N(\delta)\Pi_N) u_0\|_\mcH \\
+    &\leq Me^{\omega T} \left[\|(I-T(\delta))u_0\|_\mcH +  \|(T(\delta)- T_N(\delta)\Pi_N) u_0\|_\mcH\right] \\
+    &\leq Me^{\omega T} \left[\|(I-T(\delta))u_0\|_\mcH +  \sup_{t\in[0,T]}\|(T(t)- T_N(t)\Pi_N) u_0\|_\mcH\right].
+\eea
+Now define the following functions:
+\be
+    \RN1^*(\delta) := Me^{\omega T}\times\|(I-T(\delta))u_0\|_\mcH 
+\ee
+and 
+\be
+    \RN1^{**}(N) := Me^{\omega T} \times \sup_{t\in[0,T]}\|(T(t)- T_N(t)\Pi_N) u_0\|_\mcH
+\ee
+Note that \(\lim_{\delta\to 0^+} \RN1^*(\delta) = 0\) by the continuity of \(T(t)\) and \(\lim_{N\to\infty} \RN1^{**}(N) = 0\) by the Trotter-Kato theorem.
+
+\item We have that
+\bea
+    \RN2(\delta, N) &\leq \int_0^{t_0} \left\| (T_N(t_0-s) - T_N(t_0+\delta -s))\Pi_N\mathcal F(u_N(s))\right\|_{\mathcal H}\d s \\
+    &\leq Me^{\omega T} \int_0^{t_0} \left\| (I- T_N(\delta)\Pi_N)\mathcal F(u_N(s))\right\|_{\mathcal H}\d s  \\
+    &\leq Me^{\omega T} \left[\underbrace{ \int_0^{t_0} \left\| (I- T_N(\delta)\Pi_N)\mcF(u(s))\right\|_{\mcH}\d s}_A  \right. \\
+    & \hspace{6em} + \left. \underbrace{\int_0^{t_0} \left\| (I- T_N(\delta)\Pi_N)(\mcF(u_N(s)) -\mcF(u(s)))\right\|_{\mcH}\d s}_B \right].
+\eea
+From here, we can note that 
+\bea
+    A &\leq \int_0^T \|(I-T(\delta))\mcF(u(s))\|_\mcH\d s + \int_0^T \| (T(\delta) + T_N(\delta))\mcF(u(s))\|_\mcH\d  s \\
+    &\leq \int_0^T \|(I-T(\delta))\mcF(u(s))\|_\mcH\d s + \int_0^T \sup_{t\in[0,T]}  \| (T(t) + T_N(t))\mcF(u(s))\|_\mcH \d s,
+\eea
+where both of these terms can easily be shown to converge to zero as \(\delta\to 0\) and \(N\to\infty\), respectively. Namely, we can apply the Lebesgue Dominated Convergence Theorem. Also note that 
+\bea
+    B &\leq (1 + Me^{\omega T})\int_0^T \| \mcF(u_N(s)) - \mcF(u(s)) \|_\mcH \d s,
+\eea
+where the right-hand side converges to zero as \(N\to\infty\) by \eqref{conv2}. Now we set
+\be
+    \RN2^*(\delta) := Me^{\omega T}\int_0^T \|(I-T(\delta))\mcF(u(s))\|_\mcH\d s
+\ee
+and 
+\bea
+    \RN2^{**}(N) :=  & Me^{\omega T}\left[\int_0^T \sup_{t\in[0,T]}  \| (T(t) + T_N(t))\mcF(u(s))\|_\mcH \d s \right. \\
+    & \hspace{4em} \left. + \left(1 + Me^{\omega T}\right)\int_0^T \| \mcF(u_N(s)) - \mcF(u(s)) \|_\mcH \d s\right].
+\eea
+
+\item We have that 
+\bea
+    \RN3(\delta, N) &\leq \int_{t_0}^{t_0+\delta} \left\| T_N(t_0+\delta-s)\Pi_N\mathcal F(u_N(s))\right\|_\mcH \d s \\ 
+    &\leq Me^{\omega T} \int_{t_0}^{t_0+\delta} \left\| \mathcal F(u_N(s)) \right\|_\mcH \d s \\
+    &\leq Me^{\omega T} \left[ \int_{t_0}^{t_0+\delta} \| \mcF(u(s)) \|_\mcH \d s + \int_{t_0}^{t_0+\delta} \|\mcF(u_N(s)) - \mcF(u(s)) \|_\mcH \d s\right] \\
+    &\leq Me^{\omega T} \left[ \delta \times \sup_{t\in[0,T]} \| \mcF(u(t)) \|_\mcH + \int_{0}^{T} \|\mcF(u_N(s)) - \mcF(u(s)) \|_\mcH \d s\right].
+\eea
+
+Note that \( \sup_{t\in[0,T]} \| \mcF(u(t)) \|_\mcH\) is finite since \(\|\mcF(u(t))\|_\mcH\) is a continuous function. Now let 
+\be
+    \RN3^*(\delta) := Me^{\omega T}\delta \times  \sup_{t\in[0,T]} \| \mcF(u(t)) \|_\mcH
+\ee
+and
+\be
+    \RN3^{**}(N) := Me^{\omega T} \int_{0}^{T} \|\mcF(u_N(s)) - \mcF(u(s)) \|_\mcH \d s.
+\ee
+Clearly \(\lim_{\delta\to 0^+}\RN3^*(\delta) = 0\). Also from \eqref{conv2} we have that \(\lim_{N\to\infty}\RN3^{**}(N) = 0.\)
+\end{enumerate}
+
+Thus,
+\bea
+    \|u_N(t_0) - u_N(t_1)\|_{\mathcal H} &\leq \RN1(\delta, N) + \RN2(\delta, N) + \RN3(\delta, N) \\
+    &\leq [\RN1^*(\delta) + \RN2^*(\delta) + \RN3^*(\delta)] + [\RN1^{**}(N) + \RN2^{**}(N) + \RN3^{**}(N)].
+\eea
+Let \(\epsilon > 0\). We wish to choose \(\delta>0\) such that \(\|u_n(t) - u_n(t')\|_\mcH <\epsilon\) for any \(n\in\mathbb N_0\) and \(t,t'\in[0,T]\) with \(|t-t'|<\delta\). Choosing \(\delta^*\) small enough so that \(\RN1^*(\delta^*) + \RN2^*(\delta^*) + \RN3^*(\delta^*) <\epsilon/2\) and \(N\) large enough such that \(\RN1^{**}(N) + \RN2^{**}(N) + \RN3^{**}(N) < \epsilon/2\), we get that 
+\be
+    \|u_n(t) - u_n(t')\|_{\mathcal H} < \epsilon,
+\ee
+where \(|t-t'|<\delta^*\) and \(n\geq N\). For each \(n\in\mathbb N_0\) that are less than \(N\), we pick \(\delta_n>0\) such that \(\|u_n(t) - u_n(t')\|_{\mathcal H} < \epsilon\) for \(|t-t'|<\delta_n\). This is possible since \(u_n\) is uniformly continuous on \([0,T]\). Let \(\delta = \min\{\delta^*, \delta_0,\ldots, \delta_{N-1}\}\). Then \(\delta\) satisfies the challenge from \(\epsilon.\) This proves uniform equicontinuity.
+\ep
