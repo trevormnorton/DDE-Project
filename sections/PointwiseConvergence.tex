@@ -11,7 +11,7 @@ First define
 These are the partial sums of Koornwinder polynomials which converge to \((0, 1)\in L^2([-\tau, 0))\times \mathbb R\) with respect to the norm on \(\mcH\). We shall make the following assumptions,
 \begin{enumerate}[label=(\textbf{A\arabic*})]
 \item The functions \(\{S_N\}_{N=0}^\infty\) converge pointwise almost everywhere on \([-\tau,0]\) to the zero function.
-\item There exists an integrable function \(g\) on \([-\tau, 0]\) where \(|S_N| \leq g\) for each \(N\in\mathbb N_0\).
+\item The functions \(\{S_N\}_{N=0}^\infty\) are uniformly bounded, i.e., there exists \(C_0>1\)  such that \(|S_N|\leq C_0\) for all \(N\in\mathbb N_0\).
 \item The functions \(\{ [\Pi_N u_0]^D\}_{N=0}^\infty\) converge pointwise to \(u_0^D\) on \([-\tau, 0]\).
 \item The functions \(\{ [\Pi_N u_0]^D\}_{N=0}^\infty\) are uniformly bounded, i.e., there exists \(C_1\) such that \(|[\Pi_N u_0]^D| \leq C_1\) for any \(N\in\mathbb N_0\).
 \end{enumerate}
@@ -123,31 +123,9 @@ For fixed \(t\) and \(s\), the first term of the right-hand side converges to ze
 \be
     |0 - [\Pi_N\mcF(u(s))]^D(t-s-\tau)| = |f([u(s)]^D(-\tau))|\cdot \left|S_N(t-s-\tau)\right|,
 \ee
-which converges a.e. to \(0\) by our assumption (\textbf{A1}). So for fixed \(t\), \(d_N(t,s)\) converges a.e. to \(0\) for \(s\in[0,t]\). Furthermore, we can bound \(|d_N(t,s)|\) by an integrable function; namely for \(s\leq t-\tau\) we have 
-\bea
-    |d_N(t,s)| &\leq \sqrt{(2Me^{\omega T} \|\mcF(u(s)) \|_\mcH)^2 + (2Me^{\omega T} \| \mcF(u(s)) \|_\mcH)^2} \\
-    &= \sqrt{2(2Me^{\omega T} \|\mcF(u(s)) \|_\mcH)^2} \\
-    &= 2\sqrt 2 \cdot Me^{\omega T} \|\mcF(u(s)) \|_\mcH
-\eea
-and for \(s > t-\tau\)
-\bea
-    |d_N(t,s)| &\leq \sqrt{(2Me^{\omega T} \|\mcF(u(s)) \|_\mcH)^2 + (f([u(s)]^D(-\tau)) g(t-s-\tau))^2} \\
-    &\leq 2Me^{\omega T} \|\mcF(u(s)) \|_\mcH + |f([u(s)]^D(-\tau))|\cdot  |g(t-s-\tau)|.
-\eea
-So,
-\be
-|d_N(t,s)| \leq h_t(s) := \begin{cases} 2\sqrt 2 \cdot Me^{\omega T} \|\mcF(u(s)) \|_\mcH, & s\leq t-\tau \\ Me^{\omega T} \|\mcF(u(s)) \|_\mcH + |f([u(s)]^D(-\tau))|\cdot  |g(t-s-\tau)|, &s > t-\tau \end{cases},
-\ee
-where the right-hand side defines an integrable function over \([0, t]\). Thus by the Lebesgue Dominated Convergence Theorem, we have \(\int_0^td_N(t,s)\d s \to 0\) as \(N\to\infty.\)
+which converges a.e. to \(0\) by our assumption (\textbf{A1}). So for fixed \(t\), \(d_N(t,s)\) converges a.e. to \(0\) for \(s\in[0,t]\).Furthermore, we can uniformly bound \(d_N(t, s)\) by our assumption \textbf{(A2)}.Thus by the Bounded Convergence Theorem, we have \( \int^t_0 d_N (t, s) \d s \to 0\) as \(N \to \infty.\)
 
-The second convergence follows by the observations that \(\int_0^\cdot d_N(\cdot,r)\d r\) converges pointwise to \(0\) by our earlier work and can uniformly bounded on \([0,t]\) since 
-\bea
-    \left| \int_0^s d_N(s,r) \d r \right| &\leq \int_0^s |d_N(s,r)| \d r \\
-    &\leq \int_0^s h_s(r) \d r \\
-    &\leq Me^{\omega T} \int_0^T \| \mcF(u(r)) \|_\mcH \d r + \max_{t\in[0,T]} |f([u(t)]^D(-\tau))| \cdot \int_{-\tau}^0 |g(r)| \d r \\ 
-    & \hspace{5em} + 2\sqrt 2 Me^{\omega T} \int_0^T \| \mcF(u(r)) \|_\mcH \d r.
-\eea
-This allows us to apply the Bounded Convergence Theorem to get that \(\int_0^t\int_0^s d_N(s,r)\d r \d s \to 0\) as \(N\to\infty\).
+The second convergence follows by the observations that \(\int_0^\cdot d_N(\cdot,r)\d r\) converges pointwise to \(0\) by our earlier work and can uniformly bounded on \([0,t]\). This allows us to apply the Bounded Convergence Theorem to get that \(\int_0^t\int_0^s d_N(s,r)\d r \d s \to 0\) as \(N\to\infty\).
 \ep
 
 We may now state our final result.
