@@ -2,28 +2,15 @@
 
 \section{Pointwise Convergence of Galerkin Solutions in \(X\)}
 
-\subsection{Initial Assumptions}
-
-First define 
-\be
-    S_N(\theta) := \sum_{n=0}^N\frac{K_n^\tau(\theta)}{\|\mathcal K^\tau_n\|_{\mathcal H}^2}, \qquad \theta\in[-\tau, 0].
-\ee
-These are the partial sums of Koornwinder polynomials which converge to \((0, 1)\in L^2([-\tau, 0))\times \mathbb R\) with respect to the norm on \(\mcH\). We shall make the following assumptions,
-\begin{enumerate}[label=(\textbf{A\arabic*})]
-\item The functions \(\{S_N\}_{N=0}^\infty\) converge pointwise almost everywhere on \([-\tau,0]\) to the zero function.
-\item There exists an integrable function \(g\) on \([-\tau, 0]\) where \(|S_N| \leq g\) for each \(N\in\mathbb N_0\).
-\item The functions \(\{ [\Pi_N u_0]^D\}_{N=0}^\infty\) converge pointwise to \(u_0^D\) on \([-\tau, 0]\).
-\item The functions \(\{ [\Pi_N u_0]^D\}_{N=0}^\infty\) are uniformly bounded, i.e., there exists \(C_1\) such that \(|[\Pi_N u_0]^D| \leq C_1\) for any \(N\in\mathbb N_0\).
-\end{enumerate}
-Computing high orders of \(S_N\) seem to suggest that (\textbf{A1}) and (\textbf{A2}) hold. The assumptions (\textbf{A3}) and (\textbf{A4}) should hold for sufficiently regular \(u_0\).
+\subsection{The Space \(X\)}
 
 \subsection{Pointwise Convergence}
 
 It will be helpful to prove a lemma.
 \bl
-There is \(C_2>0\) such that for any \(N\in\mathbb N_0.\)
+There is \(C>0\) such that for any \(N\in\mathbb N_0.\)
 \be
-    \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_X \leq C_2 \|u(s) - u_N(s)\|_X,
+    \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_X \leq C \|u(s) - u_N(s)\|_X,
 \ee
 where \(t\in [0,T]\) and \(s\in[0,t]\).
 \el
@@ -50,17 +37,17 @@ For the second term on the right-hand side of \eqref{eq:pwx-1}, we consider firs
 Now consider the case when \(t-s<\tau.\) So we have that
 \bea\label{eq:pwx-4}
     \left|[T_N(t-s)\Pi_N(\mcF(u(s)) - \mcF(u_N(s)))]^D(-\tau)\right| = \left| \left[\Pi_N(\mcF(u(s)) - \mcF(u_N(s)))\right]^D(t-s-\tau)\right| \\
-    = \left|f([u(s)]^D(-\tau)) - f([u_N(s)]^D(-\tau))\right| \cdot \left|S_N(t-s-\tau)\right|  \hspace{1em} \\
-    \leq LC_0 \left|[u(s)]^D(-\tau) - [u_N(s)]^D(-\tau)\right|  \hspace{9em} \\
-    \leq LC_0 \|u(s) - u_N(s)\|_X.  \hspace{14.6em} 
+    = \left|f([u(s)]^D(-\tau)) - f([u_N(s)]^D(-\tau))\right| \cdot \left|S^\tau_N(t-s-\tau)\right|  \hspace{1em} \\
+    \leq L\left|[u(s)]^D(-\tau) - [u_N(s)]^D(-\tau)\right|  \hspace{9em} \\
+    \leq L \|u(s) - u_N(s)\|_X.  \hspace{14.6em} 
 \eea
 If we define 
 \be
-    C_2 := \max\{LC_0, LMe^{\omega T}\}
+    C := \max\{L, LMe^{\omega T}\}
 \ee
 and apply \eqref{eq:pwx-2}, \eqref{eq:pwx-3}, and \eqref{eq:pwx-4} to \eqref{eq:pwx-1}, then we get that 
 \be
-    \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_X \leq C_2\|u(s) - u_N(s)\|_X.
+    \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_X \leq C\|u(s) - u_N(s)\|_X.
 \ee
 \ep
 
@@ -73,12 +60,12 @@ We introduce the following definitions:
 One can apply the variation-of-constants formula and the above definitions to get that 
 \bea\label{eq:pwx-rn-1}
     r_N(t)  &\leq \epsilon_N(t) + \int_0^t d_N(t,s) \d s + \int_0^t \|T_N(t-s) \Pi_N \big( \mathcal{F}(u(s)) - \mathcal{F}(u_N(s)) \big )\|_X \d s \\
-    &\leq \epsilon_N(t) + \int_0^t d_N(t,s) \d s + C_2\int_0^t r_N(s) \d s.
+    &\leq \epsilon_N(t) + \int_0^t d_N(t,s) \d s + C\int_0^t r_N(s) \d s.
 \eea
 Applying Gr\"onwall's inequality to \eqref{eq:pwx-rn-1} gives
 \bea\label{eq:pwx-rn-2}
-    r_N(t) &\leq \left[ \epsilon_N(t) + \int_0^t d_N(t,s) \d s\right] + \int_0^t C_2 e^{C_2(t-s)} \left[ \epsilon_N(s) + \int_0^s d_N(s,r) \d r\right]\d s \\
-    &\leq \left[ \epsilon_N(t) + \int_0^t d_N(t,s) \d s\right] + C_2 e^{C_2T}\int_0^t  \left[ \epsilon_N(s) + \int_0^s d_N(s,r) \d r\right]\d s.
+    r_N(t) &\leq \left[ \epsilon_N(t) + \int_0^t d_N(t,s) \d s\right] + \int_0^t C e^{C(t-s)} \left[ \epsilon_N(s) + \int_0^s d_N(s,r) \d r\right]\d s \\
+    &\leq \left[ \epsilon_N(t) + \int_0^t d_N(t,s) \d s\right] + C e^{CT}\int_0^t  \left[ \epsilon_N(s) + \int_0^s d_N(s,r) \d r\right]\d s.
 \eea
 We wish to show that \(r_N(t)\to 0\) as \(N\to\infty\) for each fixed \(t\in[0,T]\). To this end, we show that each term on the right-hand side of \eqref{eq:pwx-rn-2} converges to \(0\) as \(N\to \infty\) and \(t\in[0,T]\) fixed. The following propositions will show this.
 
@@ -99,9 +86,9 @@ The first term on the right-hand side converges uniformly to \(0\) by the Trotte
 \be
     |u_0^D(t-\tau) - [\Pi_N u_0]^D(t-\tau)|^2
 \ee
-which converges to \(0\) by (\textbf{A3}). This gives that \(\epsilon_N(t)\to0\).
+which converges to \(0\) uniformly by \eqref{prop:uniform-conv}. This gives that \(\epsilon_N(t)\to0\).
 
-To show the other convergence, note that \(\epsilon_N(s)\) converges pointwisely to \(0\) on \([0,t]\). Furthermore, we may uniformly bound \(\epsilon_N(s)\) by again observing the equality \eqref{eq:pwx-en-1} and applying the uniform bounds on \(\|T_N(\cdot)\|_{\mathcal H}\) and the assumption (\textbf{A4}). Then by the Bounded Convergence Theorem, we have \(\int_0^t\epsilon_N(s)\d s\to 0\).
+To show the other convergence, note that \(\epsilon_N(s)\) converges pointwisely to \(0\) on \([0,t]\). Furthermore, we may uniformly bound \(\epsilon_N(s)\) by again observing the equality \eqref{eq:pwx-en-1} and applying the uniform bounds on \(\|T_N(\cdot)\|_{\mathcal H}\) and on \([\Pi_N u_0]^D\). Then by the Bounded Convergence Theorem, we have \(\int_0^t\epsilon_N(s)\d s\to 0\).
 \ep
 
 
@@ -117,37 +104,15 @@ as \(N\to\infty.\)
 We can again apply the definition of \(\|\cdot\|_X\) to get that
 \bea
     d_N^2(t,s) &= \| \left( T(t-s) -  T_N(t-s) \Pi_N \right) \mathcal{F}(u(s)) \|_\mcH^2 \\ 
-    &+ |[T(t-s)\mathcal{F}(u(s))]^D(-\tau) -  [T_N(t-s) \Pi_N\mathcal{F}(u(s))]^D(-\tau)  |^2.
+    & \hspace{1em} + |[T(t-s)\mathcal{F}(u(s))]^D(-\tau) -  [T_N(t-s) \Pi_N\mathcal{F}(u(s))]^D(-\tau)  |^2.
 \eea
 For fixed \(t\) and \(s\), the first term of the right-hand side converges to zero. For \(t-s\geq\tau\) the second term will similarly converge to \(0\). For \(t-s<\tau\), the second term will become
 \be
     |0 - [\Pi_N\mcF(u(s))]^D(t-s-\tau)| = |f([u(s)]^D(-\tau))|\cdot \left|S_N(t-s-\tau)\right|,
 \ee
-which converges a.e. to \(0\) by our assumption (\textbf{A1}). So for fixed \(t\), \(d_N(t,s)\) converges a.e. to \(0\) for \(s\in[0,t]\). Furthermore, we can bound \(|d_N(t,s)|\) by an integrable function; namely for \(s\leq t-\tau\) we have 
-\bea
-    |d_N(t,s)| &\leq \sqrt{(2Me^{\omega T} \|\mcF(u(s)) \|_\mcH)^2 + (2Me^{\omega T} \| \mcF(u(s)) \|_\mcH)^2} \\
-    &= \sqrt{2(2Me^{\omega T} \|\mcF(u(s)) \|_\mcH)^2} \\
-    &= 2\sqrt 2 \cdot Me^{\omega T} \|\mcF(u(s)) \|_\mcH
-\eea
-and for \(s > t-\tau\)
-\bea
-    |d_N(t,s)| &\leq \sqrt{(2Me^{\omega T} \|\mcF(u(s)) \|_\mcH)^2 + (f([u(s)]^D(-\tau)) g(t-s-\tau))^2} \\
-    &\leq 2Me^{\omega T} \|\mcF(u(s)) \|_\mcH + |f([u(s)]^D(-\tau))|\cdot  |g(t-s-\tau)|.
-\eea
-So,
-\be
-|d_N(t,s)| \leq h_t(s) := \begin{cases} 2\sqrt 2 \cdot Me^{\omega T} \|\mcF(u(s)) \|_\mcH, & s\leq t-\tau \\ Me^{\omega T} \|\mcF(u(s)) \|_\mcH + |f([u(s)]^D(-\tau))|\cdot  |g(t-s-\tau)|, &s > t-\tau \end{cases},
-\ee
-where the right-hand side defines an integrable function over \([0, t]\). Thus by the Lebesgue Dominated Convergence Theorem, we have \(\int_0^td_N(t,s)\d s \to 0\) as \(N\to\infty.\)
+which converges a.e. to \(0\) by \eqref{eq:pw-conv}. So for fixed \(t\), \(d_N(t,s)\) converges a.e. to \(0\) for \(s\in[0,t]\). Furthermore, we can uniformly bound \(d_N(t, s)\) by \eqref{eq:uniform-bdd}.Thus by the Bounded Convergence Theorem, we have \( \int^t_0 d_N (t, s) \d s \to 0\) as \(N \to \infty.\)
 
-The second convergence follows by the observations that \(\int_0^\cdot d_N(\cdot,r)\d r\) converges pointwise to \(0\) by our earlier work and can uniformly bounded on \([0,t]\) since 
-\bea
-    \left| \int_0^s d_N(s,r) \d r \right| &\leq \int_0^s |d_N(s,r)| \d r \\
-    &\leq \int_0^s h_s(r) \d r \\
-    &\leq Me^{\omega T} \int_0^T \| \mcF(u(r)) \|_\mcH \d r + \max_{t\in[0,T]} |f([u(t)]^D(-\tau))| \cdot \int_{-\tau}^0 |g(r)| \d r \\ 
-    & \hspace{5em} + 2\sqrt 2 Me^{\omega T} \int_0^T \| \mcF(u(r)) \|_\mcH \d r.
-\eea
-This allows us to apply the Bounded Convergence Theorem to get that \(\int_0^t\int_0^s d_N(s,r)\d r \d s \to 0\) as \(N\to\infty\).
+The second convergence follows by the observations that \(\int_0^\cdot d_N(\cdot,r)\d r\) converges pointwise to \(0\) by our earlier work and can uniformly bounded on \([0,t]\). This allows us to apply the Bounded Convergence Theorem to get that \(\int_0^t\int_0^s d_N(s,r)\d r \d s \to 0\) as \(N\to\infty\).
 \ep
 
 We may now state our final result.
