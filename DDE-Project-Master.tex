@@ -21,6 +21,8 @@
 \usepackage{./styles/DDE-Project-Master}
 \usepackage{./styles/Equicontinuity}
 
+\numberwithin{equation}{section}
+
 \title{Title}
 \author{Authors}
 \date{}                                         
@@ -29,13 +31,14 @@
 
 \maketitle
 
+\input{./sections/Koornwinder.tex}
 
 \input{./sections/PointwiseConvergence.tex}
 
 \input{./sections/Equicontinuity.tex}
 
-%\bibliographystyle{plain}
-%\bibliography{./bibs/***}
+\bibliographystyle{plain}
+\bibliography{./bibs/DDE-Project.bib}
 
 
 \end{document}  
