@@ -42,6 +42,17 @@
 \def\ben{\begin{enumerate}}
 \def\een{\end{enumerate}}
 
+\newcommand{\TODO}[1]{
+    \GenericWarning{}{%
+    --------------------------------------------------
+    \MessageBreak
+    TODO: #1
+    \MessageBreak
+    --------------------------------------------------
+    \MessageBreak
+    }
+}
+
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
 
 \newcommand{\R}{\mathbb R}

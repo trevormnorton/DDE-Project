@@ -2,9 +2,7 @@
 
 \section{Koornwinder Polynomials}
 
-%%
-%% TODO add a discussion of Koornwinder polynomials here
-%%
+\TODO{add a discussion of Koornwinder polynomials here}
 
 % This section should discuss how Koornwinder Polynomials are defined. It will also go over the properties of S_N that will be used later for proofs.
 \subsection{Properties and Basic Results of Koornwinder Polynomials}
@@ -22,7 +20,7 @@ The polynomial \(K_n\) defined in \eqref{eq:Pn} is of degree \(n\) and  admits t
 \ee
 and the following normalization property holds:
 \be
-    K_n(1) = 1, \qquad n \in \mathbb{N}.
+    K_n(1) = 1, \qquad n \in \Nzero.
 \ee
 
 Moreover, the sequence given by
@@ -31,7 +29,7 @@ Moreover, the sequence given by
 \ee 
 forms an orthogonal basis of the  product space 
 \be
-    \mathcal{E} := L^2([-1,1); \mathbb{R}) \times  \mathbb{R},
+    \mathcal{E} := L^2([-1,1); \R) \times  \R,
 \ee 
 where \(\mcE\) is endowed with the following inner product:
 \be
@@ -51,11 +49,11 @@ a_n(f) := \frac{2n + 1} 2 \int_{-1}^1 f(x)L_n(x)\d x.
 \ee
 
 \bprop\label{prop:uniform-conv}
-Let \(g\in \mathcal C^2([-1,1];\mathbb R)\) and denote \(\psi = (g, g(0)) \in\mcE\). Then the series
+Let \(g\in \mathcal C^2([-1,1];\mathbb R)\) and denote \(\psi = (f, f(0)) \in\mcE\). Then the series
 \be\label{koorn-series}
     [\Pi_N\psi]^D = \sum_{n=0}^N \frac{\langle \psi, \mcK_n \rangle_\mcE}{\| \mcK_n \|^2_\mcE} K_n
 \ee
-converges uniformly to \(g\).
+converges uniformly to \(f\).
 \eprop
 
 \bp
@@ -96,7 +94,7 @@ where \(V_1 := \int_{-1}^1 \frac {f''(x)} {\sqrt{1-x^2}} \d x < \infty\). Thus,
 \ee
 and so
 \bea
-    \frac{| \langle \psi, \mathcal K_n \rangle_\mcH |}{\| \mathcal K_n \|_\mcH^2} \| K_n \|_\infty &\leq \left[  \frac {2 \| f' \|_\infty} {\sqrt{6n + 3}} + V_1\sqrt{2\pi} \frac{n^2 + n + 2}{\sqrt n (4n^2 + 1)} \right] \times \left[ \frac{2n + 1}{(n^2 + 1)((n+1)^2 +1)} \right] \times \left[ 2n^2 + 1\right] \\
+    \frac{| \langle \psi, \mathcal K_n \rangle_\mcH |}{\| \mathcal K_n \|_\mcH^2} \| K_n \|_\infty &\leq \left[  \frac {2 \| f' \|_\infty} {\sqrt{6n + 3}} + V_1\sqrt{2\pi} \frac{n^2 + n + 2}{\sqrt n (4n^2 + 1)} \right] \times \left[ \frac{(2n + 1)(2n^2 + 1)}{(n^2 + 1)((n+1)^2 +1)} \right] \\
     &= O\left( \frac 1 {n^{3/2}} \right).
 \eea
 By the Weierstrass M-test, the series \eqref{koorn-series} converges uniformly. 
