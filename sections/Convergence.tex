@@ -113,7 +113,7 @@ which converges a.e. to \(0\) by \eqref{eq:pw-conv}. So for fixed \(t\), \(d_N(t
 The second convergence follows by the observations that \(\int_0^\cdot d_N(\cdot,r)\d r\) converges pointwise to \(0\) by our earlier work and can uniformly bounded on \([0,t]\). This allows us to apply the Bounded Convergence Theorem to get that \(\int_0^t\int_0^s d_N(s,r)\d r \d s \to 0\) as \(N\to\infty\).
 \ep
 
-We may now state our final result.
+We may now state our result.
 \bt\label{thm:pointwise} For \(t\in[0,T]\), 
 \be
     \lim_{N\to\infty} \|u(t)  - u_N(t)\|_X = 0.
@@ -121,7 +121,7 @@ We may now state our final result.
 \et
 
 \bp
-Apply propositions \eqref{prop:pwx-con-1} and \eqref{prop:pwx-con-2} to the inequality in \eqref{eq:pwx-rn-2}.
+Apply propositions \eqref{prop:pwx-con-1} and \eqref{prop:pwx-con-2} to the inequality in \eqref{pwx-rn-2}.
 \ep
 
 \subsection{Uniform Convergence}
@@ -129,11 +129,11 @@ Apply propositions \eqref{prop:pwx-con-1} and \eqref{prop:pwx-con-2} to the ineq
 \bl
 The following convergences hold:
 \be\label{conv1}
-    \lim_{N\to\infty} [u_N(\cdot)]^D(-\tau) = [u(\cdot)]^D(-\tau) \text{ with respect to } L^2([0,T];\mathbb R),
+    \lim_{N\to\infty} \int_0^T \left| [u_N(s)]^D(-\tau) - [u(s)]^D(-\tau) \right|^2 \d s,
 \ee
 and 
 \be\label{conv2}
-    \lim_{N\to\infty} \mcF (u_N(\cdot)) = \mathcal F(u(\cdot))\text{ with respect to } L^1([0,T]; \mcH).
+    \lim_{N\to\infty} \int_0^T \| \mcF (u_N(s)) - \mcF(u(s) \|_\mcH \d s = 0.
 \ee
 \el
 
@@ -146,7 +146,7 @@ for \(m\) such that \(T-\tau \leq m\tau < T\). In other words,
 \bea\label{unineq}
     \left\| [u_N(\cdot)]^D(-\tau) - [u(\cdot)]^D(-\tau) \right\|^2_{L^2([0,T];\mathbb R)} \leq \sum_{k=0}^m \left\| [u_N(k\tau)]^D - [u(k\tau)]^D \right\|^2_{L^2([-\tau,0); \R)}.
 \eea
-It has been shown that \(\|[u_N(t)]^D - [u(t)]^D]\|_{L^2([0,T];\mathbb R)} \to 0\) as \(N\to\infty\) for any \(t\in[0,T]\). This gives that the right side of \eqref{unineq} converges to \(0\) as \(N\to\infty\), and thus the left side of \eqref{unineq} also converges to \(0\) as \(N\to\infty\). This proves \eqref{conv1}. 
+It is a simple corollary of \cref{thm:pointwise} that \(\|[u_N(t)]^D - [u(t)]^D]\|_{L^2([0,T];\mathbb R)} \to 0\) as \(N\to\infty\) for any \(t\in[0,T]\). This gives that the right side of \eqref{unineq} converges to \(0\) as \(N\to\infty\), and thus the left side of \eqref{unineq} also converges to \(0\) as \(N\to\infty\). This proves \eqref{conv1}. 
 
 To prove the other convergence, note that 
 \bea
