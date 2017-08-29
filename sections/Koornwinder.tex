@@ -1,15 +1,24 @@
 %!TEX root = ../DDE-Project-Master.tex
 
-\section{Koornwinder Polynomials}
+\section{Preliminaries}
 
-\TODO{add a discussion of Koornwinder polynomials here}
+\subsection{The type of DDE}
+
+We are interested in approximating the solution to the following DDE:
+\bea
+    \frac{\d x}{\d t} &= ax(t) + bx(t-\tau) + F(x(t-\tau)), & t&> 0 \\
+    x(t) &= \varphi(t), & t&\in[-\tau, 0]
+\eea
+for \(\varphi \in L^2([-\tau, 0];\R)\) and where \(F:\R \to \R\) is Lipschitz with constant \(L.\) It is appropriate to formulate this problem into the space \(\mcH := L^2([-\tau, 0);\R) \times \R.\)
 
 % This section should discuss how Koornwinder Polynomials are defined. It will also go over the properties of S_N that will be used later for proofs.
 \subsection{Properties and Basic Results of Koornwinder Polynomials}
 
+\TODO{add a discussion of Koornwinder polynomials here}
+
 From \cite[Eq.~(2.1)]{Koornwinder}, the sequence of Koornwinder polynomials \(\{K_n\}\) can be built from the Legendre polynomials \(L_n\) by 
 \be\label{eq:Pn}
-    K_n(s) := -(1+s)\frac d {\d s} + (n^2+n+1)L_n(s), \quad s\in[-1,1],\  n\in\Nzero.
+    K_n(s) := -(1+s)\frac d {\d s} L_n(s)+ (n^2+n+1)L_n(s), \quad s\in[-1,1],\  n\in\Nzero.
 \ee
 
 Furthermore, we reproduce from \cite[Prop.~3.1]{GalerkinApprox} some simple properties that \(\{K_n\}\) satisfy.
@@ -49,7 +58,7 @@ a_n(f) := \frac{2n + 1} 2 \int_{-1}^1 f(x)L_n(x)\d x.
 \ee
 
 \bprop\label{prop:uniform-conv}
-Let \(g\in \mathcal C^2([-1,1];\mathbb R)\) and denote \(\psi = (f, f(0)) \in\mcE\). Then the series
+Let \(f\in \mathcal C^2([-1,1];\mathbb R)\) and denote \(\psi = (f, f(0)) \in\mcE\). Then the series
 \be\label{koorn-series}
     [\Pi_N\psi]^D = \sum_{n=0}^N \frac{\langle \psi, \mcK_n \rangle_\mcE}{\| \mcK_n \|^2_\mcE} K_n
 \ee
@@ -76,7 +85,7 @@ If we use integration by parts, we find that
 \ee
 Applying \eqref{int-by-parts} to \eqref{inner-product} gives that
 \bea
-    \langle \psi, \mathcal K_n \rangle_\mcH &= \frac 1 2 \int_{-1}^1 f'(x)(1+x)L_n(x) \d x + \frac{n^2 + n + 2} 2 \int_{-1}^1 f(x)L_n(x) \d x \\
+    \langle \psi, \mathcal K_n \rangle_\mcE &= \frac 1 2 \int_{-1}^1 f'(x)(1+x)L_n(x) \d x + \frac{n^2 + n + 2} 2 \int_{-1}^1 f(x)L_n(x) \d x \\
     &= \frac 1 2 \int_{-1}^1 f'(x)(1+x)L_n(x) \d x + \frac{n^2 + n + 2} {2n + 1} a_n(f).
 \eea
 We can also note that by applying the Ho\"lder inequality we get
@@ -189,3 +198,15 @@ So
 \ee
 where the right-hand side converges to \(0\) as \(N\to\infty\) for fixed \(x\in(-1,1).\) Thus \(S_N(x) \to 0\) as \(N\to\infty\) for \(x\in(-1,1)\).
 \ep
+
+\subsection{The Space \(X\)}
+
+We define the following inner product space with elements in 
+\be
+    X := \mathcal C([-\tau, 0) ; \mathbb R) \times \mathbb R
+\ee
+and the inner product defined by
+\be
+    (\Phi, \Psi)_X := \Phi^S\Psi^S + \frac 1 \tau (\Phi^D, \Psi^D)_{L^2([-\tau, 0)} + \Phi^D(-\tau)\Psi^D(-\tau), \quad \Phi,\Psi\in X.
+\ee
+It is relatively straight-forward to verify that \((\cdot, \cdot)_X\) is symmetric, bilinear, and positive definite and thus is an inner product. We will also make use of the norm \(\|\cdot\|_X\) induced from this inner product. Note that \(X\) is \textbf{not} a Banach space since Cauchy sequences might not converge in \(X\).

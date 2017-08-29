@@ -6,11 +6,11 @@
 
 \bl
 The following convergences hold:
-\be\label{conv1}
+\be\label{uN-L2_conv}
     \lim_{N\to\infty} [u_N(\cdot)]^D(-\tau) = [u(\cdot)]^D(-\tau) \text{ with respect to } L^2([0,T];\mathbb R),
 \ee
 and 
-\be\label{conv2}
+\be\label{F-L1-conv}
     \lim_{N\to\infty} \mcF (u_N(\cdot)) = \mathcal F(u(\cdot))\text{ with respect to } L^1([0,T]; \mcH).
 \ee
 \el
@@ -18,15 +18,13 @@ and
 \bp
 Note that 
 \bea
-    \int_0^T \left| [u_N(s)]^D(-\tau) - [u(s)]^D(-\tau) \right|^2 \d s &\leq \sum_{k=0}^m \int_{-\tau}^0 \left| [u_N(k\tau)]^D(\theta) - [u(k\tau)]^D(\theta) \right|^2\d\theta  \\
-    &  \hspace{1.5em} +  \int_{-\tau}^0 \left| [u_N(T)]^D(\theta) - [u(T)]^D(\theta) \right|^2 \d\theta.
+    \int_0^T \left| [u_N(s)]^D(-\tau) - [u(s)]^D(-\tau) \right|^2 \d s &\leq \sum_{k=0}^m \int_{-\tau}^0 \left| [u_N(k\tau)]^D(\theta) - [u(k\tau)]^D(\theta) \right|^2\d\theta.
 \eea
 In other words, 
-\bea\label{unineq}
-    \left\| [u_N(\cdot)]^D(-\tau) - [u(\cdot)]^D(-\tau) \right\|^2_{L^2([0,T];\mathbb R)} &\leq \sum_{k=0}^m \left\| [u_N(k\tau)]^D - [u(k\tau)]^D \right\|^2_{L^2([0,T];\mathbb R)} \\
-    &  \hspace{1.7em} +  \left\| [u_N(T)]^D- [u(T)]^D \right\|^2_{L^2([0,T];\mathbb R)}.
+\bea\label{uN-ineq}
+    \left\| [u_N(\cdot)]^D(-\tau) - [u(\cdot)]^D(-\tau) \right\|^2_{L^2([0,T];\mathbb R)} &\leq \sum_{k=0}^m \left\| [u_N(k\tau)]^D - [u(k\tau)]^D \right\|^2_{L^2([0,T];\mathbb R)}.
 \eea
-It has been shown that \(\|[u_N(t)]^D - [u(t)]^D]\|_{L^2([0,T];\mathbb R)} \to 0\) as \(N\to\infty\) for any \(t\in[0,T]\). This gives that the right side of \eqref{unineq} converges to \(0\) as \(N\to\infty\), and thus the left side of \eqref{unineq} also converges to \(0\) as \(N\to\infty\). This proves \eqref{conv1}. 
+It has been shown that \(\|[u_N(t)]^D - [u(t)]^D]\|_{L^2([0,T];\mathbb R)} \to 0\) as \(N\to\infty\) for any \(t\in[0,T]\). This gives that the right side of \eqref{uN-ineq} converges to \(0\) as \(N\to\infty\), and thus the left side of \eqref{uN-ineq} also converges to \(0\) as \(N\to\infty\). This proves \eqref{uN-L2_conv}. 
 
 To prove the other convergence, note that 
 \bea
@@ -34,7 +32,7 @@ To prove the other convergence, note that
     &\leq L \int_0^T \left| [u_N(s)]^D(-\tau)- [u(s)]^D(-\tau)\right|\d s \\
     &=L \| [u_N(\cdot)]^D(-\tau)- [u(\cdot)]^D(-\tau) \|_{L^1([0,T];\mathbb R)}.
 \eea
-Noting that \(L^2([0,T];\mathbb R)\) is continuously embedded in \(L^1([0,T];\mathbb R)\) and applying \eqref{conv1} proves that \eqref{conv2} holds.
+Noting that \(L^2([0,T];\mathbb R)\) is continuously embedded in \(L^1([0,T];\mathbb R)\) and applying \eqref{uN-L2_conv} proves that \eqref{F-L1-conv} holds.
 \ep
 
 \subsection{Uniform Equicontinuity}
@@ -93,7 +91,7 @@ where both of these terms can easily be shown to converge to zero as \(\delta\to
 \bea
     B &\leq (1 + Me^{\omega T})\int_0^T \| \mcF(u_N(s)) - \mcF(u(s)) \|_\mcH \d s,
 \eea
-where the right-hand side converges to zero as \(N\to\infty\) by \eqref{conv2}. Now we set
+where the right-hand side converges to zero as \(N\to\infty\) by \eqref{F-L1-conv}. Now we set
 \be
     \RN2^*(\delta) := Me^{\omega T}\int_0^T \|(I-T(\delta))\mcF(u(s))\|_\mcH\d s
 \ee
@@ -119,7 +117,7 @@ and
 \be
     \RN3^{**}(N) := Me^{\omega T} \int_{0}^{T} \|\mcF(u_N(s)) - \mcF(u(s)) \|_\mcH \d s.
 \ee
-Clearly \(\lim_{\delta\to 0^+}\RN3^*(\delta) = 0\). Also from \eqref{conv2} we have that \(\lim_{N\to\infty}\RN3^{**}(N) = 0.\)
+Clearly \(\lim_{\delta\to 0^+}\RN3^*(\delta) = 0\). Also from \eqref{F-L1-conv} we have that \(\lim_{N\to\infty}\RN3^{**}(N) = 0.\)
 \end{enumerate}
 
 Thus,
