@@ -4,13 +4,49 @@
 
 \subsection{The type of DDE}
 
-We are interested in approximating the solution to the following DDE:
-\bea
-    \frac{\d x}{\d t} &= ax(t) + bx(t-\tau) + F(x(t-\tau)), & t&> 0 \\
+We are interested in approximating the solution to the following autonomous scalar DDE of dimension \(1\):
+\bea\label{eq:dde}
+    \frac{\d x(t)}{\d t} &= ax(t) + bx(t-\tau) + F(x(t-\tau)), & t&> 0 \\
     x(t) &= \varphi(t), & t&\in[-\tau, 0]
 \eea
-for \(\varphi \in L^2([-\tau, 0];\R)\) and where \(F:\R \to \R\) is Lipschitz with constant \(L.\) It is appropriate to formulate this problem into the space \(\mcH := L^2([-\tau, 0);\R) \times \R.\)
-
+for \(\varphi \in L^2([-\tau, 0];\R)\), \(a,b\in\R\), and where \(F:\R \to \R\) is Lipschitz with constant \(L.\) It is appropriate to formulate this problem into the Hilbert space 
+\be
+    \mcH := L^2([-\tau, 0);\R) \times \R,
+\ee
+where the inner product is defined for \((f_1, \gamma_1),\, (f_2, \gamma_2) \in \mcH \), as:
+\be \label{H_inner}
+    \langle (f_1, \gamma_1), (f_2, \gamma_2) \rangle_{\mathcal{H}} := \frac1 \tau \int_{-\tau}^0 f_1(\theta)f_2(\theta)  \d \theta  + \gamma_1\gamma_2.
+\ee
+ Let us denote by \(x_t\) the time evolution of the history segments of a solution to \cref{eq:dde}, i.e., 
+\be
+    x_t(\theta) := x(t+\theta), \qquad t\geq0, \qquad \theta\in[-\tau, 0].
+\ee
+Then by introducing 
+\be
+    u(t) := (x_t, x_t(0)),
+\ee
+we can rewrite \cref{eq:dde} as the following abstract ODE on \(\mcH\):
+\be \label{eq:abstract_ode}
+    \frac{\d u}{\d t}  = \mcA u + \mcF (u).
+\ee
+The linear operator \(\mcA: D(\mcA) \to \mcH\) is defined by
+\bea \label{def:mcA}
+    \lbrack \mcA \Psi \rbrack (\theta) & := \begin{cases}
+    {\displaystyle \frac{\d^+ \Psi^D}{\d \theta}}, &  \theta \in[-\tau, 0),  \vspace{0.5em}\\ 
+    {\displaystyle a\Psi^S + b\Psi^D(-\tau)}, & \theta = 0,
+    \end{cases}   
+\eea
+for any $\Psi = (\Psi^D, \Psi^S)$ that lives  in the domain,  $D(\mathcal{A})$, defined as
+\be \label{D_of_A2}
+    D(\mcA): = \left\{\Psi \in \mcH : \Psi^D \in H^1([-\tau, 0); \mathbb{R}^d), \lim_{\theta \to 0^-} \Psi^D(\theta) =\Psi^S \right\}.
+\ee
+The nonlinear operator \(\mcF:\mcH \to \mcH\) is defined by 
+\bea \label{mcF}
+    [\mcF (\Psi) ](\theta) & := \begin{cases}
+    0, &  \theta \in[-\tau, 0),   \vspace{0.4em}\\ 
+    F \left( \Psi^D(-\tau) \right), & \theta = 0, 
+    \end{cases}  \quad \Forall \Psi = (\Psi^D, \Psi^S) \in  \mcH.
+\eea
 % This section should discuss how Koornwinder Polynomials are defined. It will also go over the properties of S_N that will be used later for proofs.
 \subsection{Properties and Basic Results of Koornwinder Polynomials}
 
