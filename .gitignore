@@ -6,3 +6,9 @@
 *.log
 
 *.out
+
+*.bbl
+
+*.blg
+
+DDE-Project-Master.thm

@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass{siamart1116}
 \usepackage{geometry}    
 %\usepackage[parfill]{parskip}
 \usepackage{epstopdf}
@@ -10,12 +10,14 @@
 \usepackage{amsmath}
 \usepackage{color}
 \usepackage{graphicx, graphics, subfigure}
-\usepackage{amsfonts, amssymb, amsthm}
+\usepackage{amsfonts, amssymb}
 \usepackage{sidecap}
 \usepackage{needspace} 
 
-\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue,
-            citecolor=blue, urlcolor=blue]{hyperref}  
+%\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue,
+            %citecolor=blue, urlcolor=blue]{hyperref}  
+
+\usepackage{cleveref}
 
 %%% Insert the custom commands %%%
 \usepackage{./styles/DDE-Project-Master}
@@ -44,7 +46,7 @@
 
 \input{./sections/Equicontinuity.tex}
 
-\bibliographystyle{plain}
+\bibliographystyle{./bibs/siamplain}
 \bibliography{./bibs/DDE-Project.bib}
 
 
