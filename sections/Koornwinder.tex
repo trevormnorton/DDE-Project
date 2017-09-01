@@ -2,14 +2,38 @@
 
 \section{Preliminaries}
 
-\subsection{The type of DDE}
-
-We are interested in approximating the solution to the following autonomous scalar DDE of dimension \(1\):
-\bea\label{eq:dde}
-    \frac{\d x(t)}{\d t} &= ax(t) + bx(t-\tau) + F(x(t-\tau)), & t&> 0 \\
-    x(t) &= \varphi(t), & t&\in[-\tau, 0]
+\subsection{DDEs covered by the proposed approach} We consider systems of nonlinear DDEs involving multiple discrete or distributed delays, either in the linear term or in the nonlinearity. Such DDEs can be put into the following form: 
+\bea \label{Eq_DDE_general}
+\frac{\d \boldsymbol{x}(t)}{\d t}  = \boldsymbol{A} \boldsymbol{x}(t) & + \sum_{i=1}^p \boldsymbol{B}_i  \boldsymbol{x}(t-\tau_i) + \sum_{i=1}^p \boldsymbol{C}_i  \int^t_{t-\tau_i} \boldsymbol{x}(s) \d s \\
+& +  \boldsymbol{F} \left(t, \boldsymbol{x}(t), \boldsymbol{x}(t-\tau_1), \cdots, \boldsymbol{x}(t-\tau_p), \int^t_{t-\tau_1} \boldsymbol{x}(s) \d s, \cdots, \int^t_{t-\tau_p} \boldsymbol{x}(s) \d s\right),
 \eea
-for \(\varphi \in L^2([-\tau, 0];\R)\), \(a,b\in\R\), and where \(F:\R \to \R\) is Lipschitz with constant \(L.\) It is appropriate to formulate this problem into the Hilbert space 
+where the unknown function $\boldsymbol{x}$ is a $d$-dimensional vector; $p$ is a positive integer, representing the total number of delays; the $\tau_i$'s are distinctive positive scalars arranged in ascending order; $\boldsymbol{A}$, $\boldsymbol{B}_i$, and $\boldsymbol{C}_i$ ($1\le i \le p$) are given $d\times d$ matrices; and $\boldsymbol{F}\colon \mathbb{R}^{2+2p} \rightarrow \mathbb{R}^d$ is a given continuous vector function.
+
+In order to simplify the presentation, we first articulate our main contribution in a simple setting of a scalar DDE with a single discrete delay $\tau>0$:
+%\bea\label{eq:dde}
+%    \frac{\d x(t)}{\d t} &= ax(t) + bx(t-\tau) + F(x(t-\tau)), & t&> 0 \\
+%    x(t) &= \varphi(t), & t&\in[-\tau, 0],
+%\eea
+\be\label{eq:dde}
+    \frac{\d x(t)}{\d t} = ax(t) + bx(t-\tau) + F(x(t-\tau)), 
+\ee
+where \(a,b\in\R\), and \(F:\R \to \R\) is a given scalar function. Results for the general case of \eqref{Eq_DDE_general} is provided afterward in Section~\ref{Sect_convergence_system_case}. 
+
+
+{\alert************************************
+\bi
+\item Explain in a short paragraph the main difficult compared with the case dealt with in \cite{CGLW16}.
+\item To cope with the difficulties, we restrict the initial data to $C^2$ functions. Refer to Section~\ref{Sect_convergence_system_case} for results about existence and regularity. 
+\ei
+
+************************************
+}
+
+
+%\in L^2([-\tau, 0];\R)\), 
+
+
+It is appropriate to formulate {\attn this problem} into the Hilbert space 
 \be
     \mcH := L^2([-\tau, 0);\R) \times \R,
 \ee
@@ -40,12 +64,12 @@ for any $\Psi = (\Psi^D, \Psi^S)$ that lives  in the domain,  $D(\mathcal{A})$, 
 \be \label{D_of_A2}
     D(\mcA): = \left\{\Psi \in \mcH : \Psi^D \in H^1([-\tau, 0); \mathbb{R}^d), \lim_{\theta \to 0^-} \Psi^D(\theta) =\Psi^S \right\}.
 \ee
-The nonlinear operator \(\mcF:\mcH \to \mcH\) is defined by 
+The {\attn nonlinear operator \(\mcF:\mcH \to \mcH\)} is defined by 
 \bea \label{mcF}
     [\mcF (\Psi) ](\theta) & := \begin{cases}
     0, &  \theta \in[-\tau, 0),   \vspace{0.4em}\\ 
     F \left( \Psi^D(-\tau) \right), & \theta = 0, 
-    \end{cases}  \quad \Forall \Psi = (\Psi^D, \Psi^S) \in  \mcH.
+    \end{cases}  \quad {\attn \Forall \Psi = (\Psi^D, \Psi^S) \in  \mcH}.
 \eea
 % This section should discuss how Koornwinder Polynomials are defined. It will also go over the properties of S_N that will be used later for proofs.
 \subsection{Properties and Basic Results of Koornwinder Polynomials}
@@ -57,7 +81,7 @@ From \cite[Eq.~(2.1)]{Koornwinder}, the sequence of Koornwinder polynomials \(\{
     K_n(s) := -(1+s)\frac d {\d s} L_n(s)+ (n^2+n+1)L_n(s), \quad s\in[-1,1],\  n\in\Nzero.
 \ee
 
-Furthermore, we reproduce from \cite[Prop.~3.1]{GalerkinApprox} some simple properties that \(\{K_n\}\) satisfy.
+Furthermore, we reproduce from \cite[Prop.~3.1]{CGLW16} some simple properties that \(\{K_n\}\) satisfy.
 \bprop
 The polynomial \(K_n\) defined in \eqref{eq:Pn} is of degree \(n\) and  admits the following expansion in terms of the Legendre polynomials:
 \be\label{eq:Pn2}
@@ -81,14 +105,14 @@ where \(\mcE\) is endowed with the following inner product:
     \langle (f, a), (g, b) \rangle_\mcE = \frac 1 2 \int_{-1}^1 f(s)g(s) \d s  + ab, \quad (f,a), (g, b) \in \mcE.
 \ee
 
-Moreover \(\left\{ \frac{\mcK_n}{\| \mcK_n \|_\mcE} \right\}\) forms a Hilbert basis of $\mcE$ where 
+Finally, \(\left\{ \frac{\mcK_n}{\| \mcK_n \|_\mcE} \right\}\) forms a Hilbert basis of $\mcE$ where 
 the norm \(\| \mcK_n \|_\mcE\) of \(\mcK_n\) induced by  \(\langle \cdot, \cdot \rangle_\mcE\)  possesses the following analytic expression:
 \be \label{eq:Pn_norm}
     \|\mcK_n\|_\mcE = \sqrt{\frac{(n^2+1)((n+1)^2+1)}{2n+1}}, \qquad n \in \Nzero.
 \ee
 \eprop
 
-Suppose that \(\Pi_N\) is the \(N\)-dimensional standard projection into \(\mbox{span}\{\mcK_n: n\leq N\} \subset \mcE\). It will be relevant to discuss when we have convergence of \([\Pi_N u]^D\) for \(u\in\mcE\). In particular, we will focus on uniform convergence. We define for \(f\in L^2([-1,1], \mathbb R)\) the following:
+Suppose that \(\Pi_N\) is the \(N\)-dimensional standard projection into \(\mbox{span}\{\mcK_n: n\leq N\} \subset \mcE\). It will be relevant to discuss when we have convergence of \([\Pi_N u]^D\) for \(u\in\mcE\). In particular, we will focus on uniform convergence. {\attn We define for \(f\in L^2([-1,1], \mathbb R)\) the following}:
 \be
 a_n(f) := \frac{2n + 1} 2 \int_{-1}^1 f(x)L_n(x)\d x.
 \ee
@@ -100,140 +124,35 @@ Let \(f\in \mathcal C^2([-1,1];\mathbb R)\) and denote \(\psi = (f, f(0)) \in\mc
 \ee
 converges uniformly to \(f\).
 \eprop
-
-\bp
-It is easy to show based on \eqref{eq:Pn2} we have for \(\theta\in[-1,1]\)
-\bea
-    |K_n(\theta)| &\leq (n^2 + 1) |L_n(\theta)| + \sum_{j=0}^{n-1} (2j+1) |L_j(\theta)| \\
-    &\leq (n^2 + 1) + \sum_{j=0}^{n-1} (2j+1) \\
-    &= 2n^2 + 1,
-\eea
-i.e., \(\| K_n \|_\infty \leq 2n^2 + 1.\)
-
-By the definition of \(\langle \cdot, \cdot \rangle_\mcE\) and the Koornwinder polynomials, we have that for \(n\in\Nzero\)
-\bea\label{inner-product}
-    \langle \psi, \mathcal K_n \rangle_\mcE &= \frac 1 2 \int_{-1}^1 f(x)K_n(x) \d x + f(1) \\
-    &= \frac 1 2 \left[-\int_{-1}^1 f(x)(1+x)L_n'(x) \d x + (n^2+n+1)\int_{-1}^1 f(x)L_n(x) \d x \right] + f(1).
-\eea
-If we use integration by parts, we find that 
-\be\label{int-by-parts}
-    -\int_{-1}^1 f(x)(1+x)L_n'(x) \d x = -2f(1) + \int_{-1}^1 f'(x)(1+x)L_n(x) \d x + \int_{-1}^1 f(x)L_n(x) \d x.
-\ee
-Applying \eqref{int-by-parts} to \eqref{inner-product} gives that
-\bea
-    \langle \psi, \mathcal K_n \rangle_\mcE &= \frac 1 2 \int_{-1}^1 f'(x)(1+x)L_n(x) \d x + \frac{n^2 + n + 2} 2 \int_{-1}^1 f(x)L_n(x) \d x \\
-    &= \frac 1 2 \int_{-1}^1 f'(x)(1+x)L_n(x) \d x + \frac{n^2 + n + 2} {2n + 1} a_n(f).
-\eea
-We can also note that by applying the Ho\"lder inequality we get
-\bea
-    \left| \int_{-1}^1 f'(x)(1+x)L_n(x) \d x \right| &\leq \| f' \|_\infty \left( \int_{-1}^1 (1+x) \d x \right)^{1/2} \| L_n \|_{L^2} \\
-    &= \frac {4 \| f' \|_\infty } {\sqrt{6n + 3}}.
-\eea
-Furthermore, from \cite[Thm.~2.1]{ConvOfLegendre} we have 
-\be
-|a_n(f)| \leq \frac {V_1} {n - \frac 1 2} \sqrt{\frac \pi {2n}},
-\ee
-where \(V_1 := \int_{-1}^1 \frac {f''(x)} {\sqrt{1-x^2}} \d x < \infty\). Thus,
-\be
-    | \langle \psi, \mathcal K_n \rangle_\mcH | \leq \frac {2 \| f' \|_\infty} {\sqrt{6n + 3}} + V_1\sqrt{2\pi} \frac{n^2 + n + 2}{\sqrt n (4n^2 + 1)},
-\ee
-and so
-\bea
-    \frac{| \langle \psi, \mathcal K_n \rangle_\mcH |}{\| \mathcal K_n \|_\mcH^2} \| K_n \|_\infty &\leq \left[  \frac {2 \| f' \|_\infty} {\sqrt{6n + 3}} + V_1\sqrt{2\pi} \frac{n^2 + n + 2}{\sqrt n (4n^2 + 1)} \right] \times \left[ \frac{(2n + 1)(2n^2 + 1)}{(n^2 + 1)((n+1)^2 +1)} \right] \\
-    &= O\left( \frac 1 {n^{3/2}} \right).
-\eea
-By the Weierstrass M-test, the series \eqref{koorn-series} converges uniformly. 
-
-Note also that \eqref{koorn-series} is simply the functional part of the Koornwinder expansion of \(\psi\) in \(\mcH\). So the series converges in \(L^2([-1,1]; \mathbb R)\) to \(\psi^D = f\). Therefore, since the series converges uniformly, it must converge uniformly to \(f\).
-\ep
+See Appendix~\ref{Appendix_proofs} for a proof.
 
 It will also be necessary to prove certain properties of the series of Koornwinder polynomials
 \be\label{eq:SN}
     S_N(x) := \sum_{n=0}^N \frac{K_n}{\| \mcK_n \|_\mcE^2}, \quad N\in\Nzero,\  x\in[-1,1].
 \ee
-If we were to denote \(\psi = (0,1) \in L^2([-1,1)) \times \R\), then \(S_N\) would simply be the functional part of \(\Pi_N\psi\). The following lemma allows us to express \(S_N\) in terms of Legendre Polynomials.
+If we were to denote \(\psi = (0,1) \in L^2([-1,1)) \times \R\), then \(S_N\) would simply be the functional part of \(\Pi_N\psi\). {\attn The following lemma allows us to express \(S_N\) in terms of Legendre Polynomials. Now that we have this expression, we can prove the properties of \(S_N\) that will be useful when showing the main result.}
 
-\bl
+\bl \label{Lemma_S_N}
 The functions \(S_N\) defined in \eqref{eq:SN} can be expressed as
 \be
-    S_N(x) = \frac 1 {(N + 1)^2 +1} \sum_{n=0}^N (2n + 1) L_n, \quad x\in[-1,1].
+S_N(x) = \frac 1 {(N + 1)^2 +1} \sum_{n=0}^N (2n + 1) L_n, \quad x\in[-1,1].
 \ee
-\el
 
-\bp
-Using \eqref{eq:Pn2}, we can show that for \(m\leq N\in\Nzero\) 
-\bea
-    \int_{-1}^1 S_N(x) L_m(x) \d x &= \sum_{n=0}^N \frac 1 {\| \mcK_n \|_\mcE^2} \int_{-1}^1 K_n(x)L_m(x) \d x \\
-    &= \| L_m \|_{L^2([-1,1])}^2 \left[ (m^2 + 1)\frac 1 {\| \mcK_m \|_\mcE^2} - (2m + 1) \sum_{k=m+1}^N \frac 1 {\| \mcK_k \|_\mcE^2}  \right],
-\eea
-and so
-\be\label{eq:SN-expansion}
-    S_N(x) = \sum_{n=0}^N \left[ \frac{n^2 + 1}{\| \mcK_n \|_\mcE^2} - (2n+1)\sum_{m=n+1}^N \frac 1 {\| \mcK_m \|_\mcE^2} \right] L_n(x).
-\ee
-It is easy to show that
-\bea
-    \sum_{n=0}^N \frac 1 {\| \mcK_n \|_\mcE^2} &= \sum_{n=0}^N \frac{2n + 1}{(n^2 + 1)((n+1)^2 + 1)} \\
-    &= \sum_{n=0}^N \left[ \frac 1 {n^2 + 1} - \frac 1{(n + 1)^2 + 1} \right] \\
-    &= 1 - \frac 1 {(N+1)^2 +1}
-\eea
-and 
-\bea\label{eq:recip-sum}
-    \sum_{m=n+1}^N \frac 1 {\| \mcK_m \|_\mcE^2} &= \sum_{m=0}^N \frac 1 {\| \mcK_m \|_\mcE^2} - \sum_{m=0}^n \frac 1 {\| \mcK_m \|_\mcE^2} \\
-    &= \frac 1 {(n+1)^2 + 1} - \frac 1 {(N+1)^2 + 1}.
-\eea
-Applying \eqref{eq:recip-sum} to \eqref{eq:SN-expansion} gives
-\bea
-    S_N(x) &= \sum_{n=0}^N \left[ \frac{n^2 + 1}{\| \mcK_n \|_\mcE^2} - (2n+1)\left(\frac 1 {(n+1)^2 + 1} - \frac 1 {(N+1)^2 + 1}\right) \right] L_n(x) \\
-    &= \sum_{n=0}^N \left[ \frac{2n + 1}{(n+1)^2 + 1} - \frac {2n+1} {(n+1)^2 + 1} + \frac {2n+1} {(N+1)^2 + 1} \right] L_n(x) \\
-    &= \sum_{n=0}^N \frac {2n + 1}{(N+1)^2 + 1} L_n(x).
-\eea
-\ep
-
-Now that we have this expression, we can prove the properties of \(S_N\) that will be useful when showing the main result.
-\bprop
-For the functions \(S_N\) defined in \eqref{eq:SN}, we have that 
+Moreover,
 \be\label{eq:uniform-bdd}
-    |S_N(x)| < 1, \quad \forall N\in\Nzero,\ \forall x\in[-1,1].
+    |S_N(x)| < 1, \quad \forall N\in\Nzero,\ \forall x\in[-1,1],
 \ee
-Furthermore,
+and
 \be\label{eq:pw-conv}
     \lim_{N\to\infty} S_N(x) = 0, \quad \forall x\in(-1,1).
 \ee
-\eprop
+\el
+See Appendix~\ref{Appendix_proofs} for a proof.
 
-\bp
-It is known that 
-\be
-    |L_n(x)| \leq 1, \quad \forall x\in[-1,1],\ \forall n\in\Nzero.
-\ee
-Thus for \(x\in[-1,1]\) and \(N\in\Nzero\)
-\bea
-    |S_N(x)| &\leq \frac 1 {(N+1)^2 +1} \sum_{n=0}^N (2n + 1) |L_n(x)| \\
-    &\leq \frac 1 {(N+1)^2 +1} \sum_{n=0}^N (2n + 1) \\
-    &= \frac {N^2 +1} {(N+1)^2 +1} \\
-    &< 1.  
-\eea
-From \cite[Thm.~61]{Rainville}, we also have that for \(n\geq 1\) and \(x\in(-1, 1)\)
-\be
-    |L_n(x)| < \sqrt{\frac \pi {2n(1-x^2)}}.
-\ee
-Then for \(x\in(-1,1)\) and \(N\in\Nzero\)
-\bea
-    |S_N(x)| &\leq \frac 1 {(N+1)^2 +1} \left[ 1 + \sum_{n=1}^N (2n+1)|L_n(x)| \right] \\
-    &\leq \frac 1 {(N+1)^2 +1} \left[ 1 + 3 \sum_{n=1}^N n  \cdot \sqrt{\frac \pi {2n(1-x^2)}}\right] \\
-    &=  \frac 1 {(N+1)^2 +1} \left[ 1 + 3\cdot\sqrt{\frac \pi {2(1-x^2)}} \cdot \sum_{n=1}^N \sqrt n \right].
-\eea
-We can note that 
-\bea
-    \sum_{n=1}^N \sqrt n &\leq \int_1^{N+1} \sqrt x \d x \\
-    &= \frac 2 3(N+1)^{3/2} - \frac 2 3.
-\eea
-So 
-\be
-     |S_N(x)| \leq \frac 1 {(N+1)^2 +1} \left[ 1 + \sqrt{\frac {2\pi} {1-x^2}} \left((N + 1)^{3/2} - 1\right)  \right],
-\ee
-where the right-hand side converges to \(0\) as \(N\to\infty\) for fixed \(x\in(-1,1).\) Thus \(S_N(x) \to 0\) as \(N\to\infty\) for \(x\in(-1,1)\).
-\ep
+\br
+{\alert Make a comment about convergence at the two endpoints.}
+\er
+
 
 \subsection{The Space \(X\)}
 
