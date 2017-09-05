@@ -72,10 +72,10 @@ The {\attn nonlinear operator \(\mcF:\mcH \to \mcH\)} is defined by
     F \left( \Psi^D(-\tau) \right), & \theta = 0, 
     \end{cases}  \quad {\attn \Forall \Psi = (\Psi^D, \Psi^S) \in  \mcH}.
 \eea
+
 % This section should discuss how Koornwinder Polynomials are defined. It will also go over the properties of S_N that will be used later for proofs.
 \subsection{Properties and Basic Results of Koornwinder Polynomials}
 
-\TODO{add a discussion of Koornwinder polynomials here}
 
 From \cite[Eq.~(2.1)]{Koornwinder}, the sequence of Koornwinder polynomials \(\{K_n\}\) can be built from the Legendre polynomials \(L_n\) by 
 \be\label{eq:Pn}
@@ -113,10 +113,7 @@ the norm \(\| \mcK_n \|_\mcE\) of \(\mcK_n\) induced by  \(\langle \cdot, \cdot 
 \ee
 \eprop
 
-Suppose that \(\Pi_N\) is the \(N\)-dimensional standard projection into \(\mbox{span}\{\mcK_n: n\leq N\} \subset \mcE\). It will be relevant to discuss when we have convergence of \([\Pi_N u]^D\) for \(u\in\mcE\). In particular, we will focus on uniform convergence. {\attn We define for \(f\in L^2([-1,1], \mathbb R)\) the following}:
-\be
-a_n(f) := \frac{2n + 1} 2 \int_{-1}^1 f(x)L_n(x)\d x.
-\ee
+Suppose that \(\Pi_N\) is the \(N\)-dimensional standard projection into \(\mbox{span}\{\mcK_n: n\leq N\} \subset \mcE\). It will be relevant to discuss when we have convergence of \([\Pi_N u]^D\) for \(u\in\mcE\). In particular, we will focus on uniform convergence. 
 
 \bprop\label{prop:uniform-conv}
 Let \(f\in \mathcal C^2([-1,1];\mathbb R)\) and denote \(\psi = (f, f(0)) \in\mcE\). Then the series
@@ -131,11 +128,11 @@ It will also be necessary to prove certain properties of the series of Koornwind
 \be\label{eq:SN}
     S_N(x) := \sum_{n=0}^N \frac{K_n}{\| \mcK_n \|_\mcE^2}, \quad N\in\Nzero,\  x\in[-1,1].
 \ee
-If we were to denote \(\psi = (0,1) \in L^2([-1,1)) \times \R\), then \(S_N\) would simply be the functional part of \(\Pi_N\psi\). {\attn The following lemma allows us to express \(S_N\) in terms of Legendre Polynomials. Now that we have this expression, we can prove the properties of \(S_N\) that will be useful when showing the main result.}
+If we were to denote \(\psi = (0,1) \in L^2([-1,1)) \times \R\), then \(S_N\) would simply be the functional part of \(\Pi_N\psi\). The following lemma allows us to express \(S_N\) in terms of Legendre Polynomials. Now that we have this expression, we can prove the properties of \(S_N\) that will be useful when showing the main result.
 
 \bl \label{Lemma_S_N}
 The functions \(S_N\) defined in \eqref{eq:SN} can be expressed as
-\be
+\be\label{eq:SN_Legendre}
 S_N(x) = \frac 1 {(N + 1)^2 +1} \sum_{n=0}^N (2n + 1) L_n, \quad x\in[-1,1].
 \ee
 
@@ -151,7 +148,7 @@ and
 See Appendix~\ref{Appendix_proofs} for a proof.
 
 \br
-{\alert Make a comment about convergence at the two endpoints.}
+It can easily be shown that \(\lim_{N\to\infty}S_N(-1) = 0\) and \(\lim_{N\to\infty} S_N(1) = 1\), which both follow from the expression \cref{eq:SN_Legendre} when evaluated at \(\pm1\).  However, for our main results we need only that \(S_N \to 0\) almost everywhere on \([-1,1]\). Therefore we omit the proof of this.
 \er
 
 

@@ -24,24 +24,24 @@ Note that for the first term on the right-hand side of \eqref{pwx-1}, we have th
     &\leq Me^{\omega T} \|\mathcal F(u(s)) - \mathcal F(u_N(s))\|_\mcH \\
     &= Me^{\omega T} \left|f([u(s)]^D(-\tau)) - f([u_N(s)]^D(-\tau))\right| \\
     &\leq {\alert \Lip(F)}Me^{\omega T} \left|[u(s)]^D(-\tau) - [u_N(s)]^D(-\tau)\right| \\
-    &\leq LMe^{\omega T} \|u(s) - u_N(s)\|_X.
+    &\leq \Lip(f)Me^{\omega T} \|u(s) - u_N(s)\|_X.
 \eea
 For the second term on the right-hand side of \eqref{pwx-1}, we consider first the case when \(t-s\geq \tau.\) Then
 \bea\label{pwx-3}
     \left|[T_N(t-s)\Pi_N(\mcF(u(s)) - \mcF(u_N(s)))]^D(-\tau)\right| &\leq \|T_N(t-s-\tau)\Pi(\mcF(u(s)) - \mcF(u_N(s)))\|_\mcH \\
     &\leq Me^{\omega T} \|\mathcal F(u(s)) - \mathcal F(u_N(s))\|_\mcH \\
-    &\leq LMe^{\omega T} \|u(s) - u_N(s)\|_X.
+    &\leq \Lip(f)Me^{\omega T} \|u(s) - u_N(s)\|_X.
 \eea
 Now consider the case when \(t-s<\tau.\) So we have that
 \bea\label{pwx-4}
     \left|[T_N(t-s)\Pi_N(\mcF(u(s)) - \mcF(u_N(s)))]^D(-\tau)\right| = \left| \left[\Pi_N(\mcF(u(s)) - \mcF(u_N(s)))\right]^D(t-s-\tau)\right| \\
     = \left|f([u(s)]^D(-\tau)) - f([u_N(s)]^D(-\tau))\right| \cdot \left|S^\tau_N(t-s-\tau)\right|  \hspace{0em} \\
-    \leq L\left|[u(s)]^D(-\tau) - [u_N(s)]^D(-\tau)\right|  \hspace{9.15em} \\
-    \leq L \|u(s) - u_N(s)\|_X.  \hspace{14.7em} 
+    \leq \Lip(f)\left|[u(s)]^D(-\tau) - [u_N(s)]^D(-\tau)\right|  \hspace{9.15em} \\
+    \leq \Lip(f) \|u(s) - u_N(s)\|_X.  \hspace{14.7em} 
 \eea
-If we define({\attn ***note that $M \ge 1$ and $\omega \ge 0$.***})
+Note that since \(M\geq 1\) and \(\omega T \geq 0\), so \(\Lip(f) \leq \Lip(f)Me^{\omega T}\). If we define
 \be
-    {\attn C := \sqrt 2 \cdot \max\{L, LMe^{\omega T}\}}
+    C := \sqrt 2 \cdot \Lip(f)Me^{\omega T}
 \ee
 and apply \eqref{pwx-2}, \eqref{pwx-3}, and \eqref{pwx-4} to \eqref{pwx-1}, then we get that 
 \be
@@ -151,8 +151,8 @@ It is a simple corollary of \cref{thm:pointwise} that \(\|[u_N(t)]^D - [u(t)]^D]
 To prove the other convergence, note that 
 \bea
     \int_0^T \|\mathcal F(u_N(s)) - \mathcal F(u(s)) \|_{\mathcal H} \d s &= \int_0^T \left| f\left([u_N(s)]^D(-\tau)\right) - f\left([u(s)]^D(-\tau)\right)\right|\d s \\
-    &\leq L \int_0^T \left| [u_N(s)]^D(-\tau)- [u(s)]^D(-\tau)\right|\d s \\
-    &=L \| [u_N(\cdot)]^D(-\tau)- [u(\cdot)]^D(-\tau) \|_{L^1([0,T];\mathbb R)}.
+    &\leq \Lip(f) \int_0^T \left| [u_N(s)]^D(-\tau)- [u(s)]^D(-\tau)\right|\d s \\
+    &=\Lip(f) \| [u_N(\cdot)]^D(-\tau)- [u(\cdot)]^D(-\tau) \|_{L^1([0,T];\mathbb R)}.
 \eea
 Noting that \(L^2([0,T];\mathbb R)\) is continuously embedded in \(L^1([0,T];\mathbb R)\) and applying \eqref{conv1} proves that \eqref{conv2} holds.
 \ep
