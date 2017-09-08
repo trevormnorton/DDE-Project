@@ -156,10 +156,20 @@ It can easily be shown that \(\lim_{N\to\infty}S_N(-1) = 0\) and \(\lim_{N\to\in
 
 We define the following inner product space with elements in 
 \be
-    X := \mathcal C([-\tau, 0) ; \mathbb R) \times \mathbb R
+    X := \mathcal C^+([-\tau, 0) ; \mathbb R) \times \mathbb R,
 \ee
-and the inner product defined by
+where \(\mathcal C^+([-\tau, 0))\) denotes the set of bounded right-continuous functions on the interval \([-\tau, 0)\), and the inner product defined by
 \be
     (\Phi, \Psi)_X := \Phi^S\Psi^S + \frac 1 \tau (\Phi^D, \Psi^D)_{L^2([-\tau, 0)} + \Phi^D(-\tau)\Psi^D(-\tau), \quad \Phi,\Psi\in X.
 \ee
-It is relatively straight-forward to verify that \((\cdot, \cdot)_X\) is symmetric, bilinear, and positive definite and thus is an inner product. We will also make use of the norm \(\|\cdot\|_X\) induced from this inner product. Note that \(X\) is \textbf{not} a Banach space since Cauchy sequences might not converge in \(X\).
+Note that this is defined since if \(f\in C^+([-\tau, 0)\) then \(f\in L^2([-\tau,0)\). It is relatively straight-forward to verify that \((\cdot, \cdot)_X\) is symmetric, bilinear, and positive definite and thus is an inner product. We will also make use of the norm \(\|\cdot\|_X\) induced from this inner product. Note that \(X\) is \textbf{not} a Banach space since Cauchy sequences might not converge in \(X\). 
+
+From \cite[Thm.~2.4.1]{CZ95}, if \(u_0\in X\), then the solution \(x(t)\) of \cref{eq:dde} with initial conditions \(u_0^D\) and \(u_0^S\) is continuous on \([0,\infty)\). Therefore, \(x_t\) is in \(\mathcal C^+([-\tau, 0))\) for any \(t\in[0,\infty)\). This gives that \(T(t)u_0 = (x_t, x_t(0))\in X\) and that \(T(t)\) maps \(X\) into \(X\). Similarly, we have that \(\Pi_N\) maps \(X\subseteq \mcH\) into \(\mcH_N\) and \(T_N(t)\) maps \(\mcH_N\) into \(\mcH_N\). Hence \(T_N(t)\Pi_N\) maps \(X\) into \(\mcH_N\), which is a subset of \(X\). 
+
+We summarize these results in the following lemma.
+
+\bl
+For any \(t\geq 0\), the operators \(T(t)\) and \(T_N(t)\Pi_N\) map \(X\) into itself.
+\el
+
+%We will use right-continuous functions in \(X\). Need a lemma to show \(T\) and \(T_N\) generate a \(C_0\)-semigroup on \(\mcH\) and stay in \(X\) if \(u_0\in X\).
