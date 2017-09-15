@@ -12,3 +12,6 @@
 *.blg
 
 DDE-Project-Master.thm
+
+*.DS_Store
+
