@@ -24,17 +24,14 @@ where \(a,b\in\R\), and \(F:\R \to \R\) is a given scalar function. Results for 
 \bi
 \item Explain in a short paragraph the main difficult compared with the case dealt with in \cite{CGLW16}.
 \item To cope with the difficulties, we restrict the initial data to $C^2$ functions. Refer to Section~\ref{Sect_convergence_system_case} for results about existence and regularity. 
-\item Make sense of the variation of constants formula.
 \ei
 
 ************************************
 }
 
+\subsection{The Abstract Formulation of the Linear Operator}
 
-%\in L^2([-\tau, 0];\R)\), 
-
-
-It is appropriate to formulate {\attn this problem} into the Hilbert space 
+It is appropriate to reformulate \cref{eq:dde} into an abstract ordinary differential equation on the Hilbert space 
 \be
     \mcH := L^2([-\tau, 0);\R) \times \R,
 \ee
@@ -42,38 +39,64 @@ where the inner product is defined for \((f_1, \gamma_1),\, (f_2, \gamma_2) \in 
 \be \label{H_inner}
     \langle (f_1, \gamma_1), (f_2, \gamma_2) \rangle_{\mathcal{H}} := \frac1 \tau \int_{-\tau}^0 f_1(\theta)f_2(\theta)  \d \theta  + \gamma_1\gamma_2.
 \ee
- Let us denote by \(x_t\) the time evolution of the history segments of a solution to \cref{eq:dde}, i.e., 
-\be
-    x_t(\theta) := x(t+\theta), \qquad t\geq0, \qquad \theta\in[-\tau, 0].
-\ee
-Then by introducing 
-\be
-    u(t) := (x_t, x_t(0)),
-\ee
-we can rewrite \cref{eq:dde} as the following abstract ODE on \(\mcH\):
-\be \label{eq:abstract_ode}
-    \frac{\d u}{\d t}  = \mcA u + \mcF (u).
-\ee
-The linear operator \(\mcA: D(\mcA) \to \mcH\) is defined by
+However, it is not yet possible to represent \(F\) in this space, so we focus on the linear part of \cref{eq:dde}. Define the linear operator \(\mcA: D(\mcA) \to \mcH\) by
 \bea \label{def:mcA}
     \lbrack \mcA \Psi \rbrack (\theta) & := \begin{cases}
     {\displaystyle \frac{\d^+ \Psi^D}{\d \theta}}, &  \theta \in[-\tau, 0),  \vspace{0.5em}\\ 
     {\displaystyle a\Psi^S + b\Psi^D(-\tau)}, & \theta = 0,
     \end{cases}   
 \eea
-for any $\Psi = (\Psi^D, \Psi^S)$ that lives  in the domain,  $D(\mathcal{A})$, defined as
+for any \(\Psi = (\Psi^D, \Psi^S)\) that lives  in the domain,  \(D(\mathcal{A})\), defined as
 \be \label{D_of_A2}
     D(\mcA): = \left\{\Psi \in \mcH : \Psi^D \in H^1([-\tau, 0); \mathbb{R}^d), \lim_{\theta \to 0^-} \Psi^D(\theta) =\Psi^S \right\}.
 \ee
-The {\attn nonlinear operator \(\mcF:\mcH \to \mcH\)} is defined by 
+It is clear that if \(x:[-\tau,\infty)\) satisfies the linear DDE
+\bea\label{eq:linear_dde}
+    &\frac{\d x(t)}{\d t} = ax(t) + bx(t-\tau), & t &> 0 \\
+    &x(0) = \alpha, && \\
+    &x(t) = f(t), & t&\in[-\tau, 0)
+\eea
+then \(u(t) = (x_t, x_t(0))\), where \(x_t(\theta)= x(t+\theta)\) for \(\theta\in[-\tau,0)\), satisfies the linear, abstract ODE
+\bea\label{eq:linear_abstract_ode}
+    &\frac{\d u}{\d t} = \mcA u, &  t>0 \\
+    &u(0) = u_0, &
+\eea
+where \(u_0 = (f, \alpha).\) From \cite[Thm.~2.4.1]{CZ95}, the DDE in \cref{eq:linear_dde} has a solution \(x(t)\). Furthermore, if we define \(T(t):\mcH\to\mcH\) by
+\be\label{semigroup}
+T(t)( f, \alpha) := (x_t, x_t(0)), \quad t\geq0,
+\ee
+then \(T(t)\) is a \(C_0\)-semigroup on \(\mcH\) and \(\mcA\) is its infinitesimal generator \cite[Thm.~2.4.4; Thm.~2.4.6]{CZ95}. With this, we know that the solution to \cref{eq:linear_abstract_ode} is \(T(t)u_0.\)
+
+\subsection{The Space \(X\)}
+
+In order for us to make sense of the nonlinear part of \cref{eq:dde}, we look at a certain subset of the space \(\mcH\). We define the following inner product space with elements in 
+\be
+    X := \mathcal C^+([-\tau, 0) ; \mathbb R) \times \mathbb R \subseteq \mcH,
+\ee
+where \(\mathcal C^+([-\tau, 0))\) denotes the set of bounded right-continuous functions on the interval \([-\tau, 0)\), and the inner product defined by
+\be
+    (\Phi, \Psi)_X := \Phi^S\Psi^S + \frac 1 \tau (\Phi^D, \Psi^D)_{L^2([-\tau, 0)} + \Phi^D(-\tau)\Psi^D(-\tau), \quad \Phi,\Psi\in X.
+\ee
+Note that this is defined since if \(f\in C^+([-\tau, 0)\) then \(f\in L^2([-\tau,0)\). It is relatively straight-forward to verify that \((\cdot, \cdot)_X\) is symmetric, bilinear, and positive definite and thus an inner product. We will also make use of the norm \(\|\cdot\|_X\) induced from this inner product. Note that \(X\) is \textbf{not} a Banach space since Cauchy sequences might not converge in \(X\). 
+
+We can then define \(\mcF:X\to X\subseteq\mcH\) by 
 \bea \label{mcF}
     [\mcF (\Psi) ](\theta) & := \begin{cases}
     0, &  \theta \in[-\tau, 0),   \vspace{0.4em}\\ 
     F \left( \Psi^D(-\tau) \right), & \theta = 0, 
-    \end{cases}  \quad {\attn \Forall \Psi = (\Psi^D, \Psi^S) \in  \mcH}.
+    \end{cases}  \quad {\Forall \Psi = (\Psi^D, \Psi^S) \in  X}.
 \eea
+From \cite[Thm.~2.4.1]{CZ95}, if \(u_0\in X\), then the solution \(x(t)\) of \cref{eq:dde} with initial conditions \(x_0 =  u_0^D\) and \(x(0) = u_0^S\) is continuous on \([0,\infty)\). Therefore, \(x_t\) is in \(\mathcal C^+([-\tau, 0))\) and \(u(t)\in X\) for any \(t\in[0,\infty)\). Now if we set \(u(t) = (x_t, x_t(0))\) where \(x\) is the solution to \cref{eq:dde}, then \(u\) satisfies the following abstract ODE:
+\bea\label{eq:abstract_ode}
+    \frac{\d u}{\d t} &= \mcA u(t) + \mcF(u(t)), \\
+    u(0) &= u_0.
+\eea
+From the above, we can derive the variation of constants formula:
+\be
+    u(t) = T(t)u_0 + \int_0^t T(t-s)\mathcal F(u(s)) \d s.
+\ee
+For a derivation c.f. \cite[pg.~105]{P83}.
 
-% This section should discuss how Koornwinder Polynomials are defined. It will also go over the properties of S_N that will be used later for proofs.
 \subsection{Properties and Basic Results of Koornwinder Polynomials}
 
 
@@ -83,7 +106,7 @@ From \cite[Eq.~(2.1)]{Koornwinder}, the sequence of Koornwinder polynomials \(\{
 \ee
 
 Furthermore, we reproduce from \cite[Prop.~3.1]{CGLW16} some simple properties that \(\{K_n\}\) satisfy.
-\bprop
+\bprop\label{prop:koorn_properties}
 The polynomial \(K_n\) defined in \eqref{eq:Pn} is of degree \(n\) and  admits the following expansion in terms of the Legendre polynomials:
 \be\label{eq:Pn2}
     K_n(s) = - \sum_{j = 0}^{n-1} (2j+1)L_j(s) + (n^2 + 1) L_n(s), \qquad n \in \Nzero;
@@ -113,12 +136,12 @@ the norm \(\| \mcK_n \|_\mcE\) of \(\mcK_n\) induced by  \(\langle \cdot, \cdot 
 \ee
 \eprop
 
-Suppose that \(\Pi_N\) is the \(N\)-dimensional standard projection into \(\mbox{span}\{\mcK_n: n\leq N\} \subset \mcE\). It will be relevant to discuss when we have convergence of \([\Pi_N u]^D\) for \(u\in\mcE\). In particular, we will focus on uniform convergence. 
+Suppose that \(\Pi^\mcE_N\) is the \(N\)-dimensional standard projection into \(\mbox{span}\{\mcK_n: n\leq N\} \subset \mcE\). It will be relevant to discuss when we have convergence of \([\Pi^\mcE_N u]^D\) for \(u\in\mcE\). In particular, we will focus on uniform convergence. 
 
 \bprop\label{prop:uniform-conv}
 Let \(f\in \mathcal C^2([-1,1];\mathbb R)\) and denote \(\psi = (f, f(0)) \in\mcE\). Then the series
 \be\label{koorn-series}
-    [\Pi_N\psi]^D = \sum_{n=0}^N \frac{\langle \psi, \mcK_n \rangle_\mcE}{\| \mcK_n \|^2_\mcE} K_n
+    [\Pi^\mcE_N\psi]^D = \sum_{n=0}^N \frac{\langle \psi, \mcK_n \rangle_\mcE}{\| \mcK_n \|^2_\mcE} K_n
 \ee
 converges uniformly to \(f\).
 \eprop
@@ -151,25 +174,44 @@ See Appendix~\ref{Appendix_proofs} for a proof.
 It can easily be shown that \(\lim_{N\to\infty}S_N(-1) = 0\) and \(\lim_{N\to\infty} S_N(1) = 1\), which both follow from the expression \cref{eq:SN_Legendre} when evaluated at \(\pm1\).  However, for our main results we need only that \(S_N \to 0\) almost everywhere on \([-1,1]\). Therefore we omit the proof of this.
 \er
 
-
-\subsection{The Space \(X\)}
-
-We define the following inner product space with elements in 
-\be
-    X := \mathcal C^+([-\tau, 0) ; \mathbb R) \times \mathbb R,
+Applying a linear transformation to the orthogonal polynomials on \([-1,1]\) will give us a set of orthogonal polynomials on \([-\tau,0]\), from which we can construct an orthogonal basis on \(\mcH\). We define a linear transformation \(\mathcal T\) by
+\be \label{eq:linear_transf}
+    \mathcal{T} \colon [-\tau, 0] \rightarrow [-1, 1], \qquad \theta \mapsto 1 + \frac{2 \theta }{\tau}. 
 \ee
-where \(\mathcal C^+([-\tau, 0))\) denotes the set of bounded right-continuous functions on the interval \([-\tau, 0)\), and the inner product defined by
+We can now define the polynomial \(K^\tau_n\) by 
+\bea \label{eq:Pn_tilde}
+    K^\tau_n\colon  [-\tau, 0] & \rightarrow \mathbb{R}, \\
+    \theta & \mapsto  K_n \Bigl( 1 + \frac{2 \theta }{\tau} \Bigr), \qquad n \in \mathbb{N}.
+\eea
+Since the sequence $\{\mathcal{K}_n = (K_n, K_n(1)) : n \in \mathbb{N}\}$ forms an orthogonal basis for $\mathcal{E}$ (cf.~\cref{prop:koorn_properties}), it follows then that the polynomial sequence \(\mcK_n^\tau := (K_n^\tau, K_n^\tau(0)) : n \in \mathbb{N}\}\) forms an orthogonal basis for the space $\mathcal{H} = L^2([-\tau,0); \mathbb{R}) \times  \mathbb{R}$ endowed with the inner product $\langle \cdot, \cdot \rangle_{\mathcal{H}}$ defined in \cref{H_inner}. We define \(S_N^\tau\) similarly. It can be verified that \cref{lemma:S_N} and \cref{prop:uniform-conv} are preserved in \(\mcH\).
+
+We are now able to define
 \be
-    (\Phi, \Psi)_X := \Phi^S\Psi^S + \frac 1 \tau (\Phi^D, \Psi^D)_{L^2([-\tau, 0)} + \Phi^D(-\tau)\Psi^D(-\tau), \quad \Phi,\Psi\in X.
+    \mcH_N := \mathrm{span}\{\mcK_0^\tau, \ldots, \mcK_N^\tau \}.
 \ee
-Note that this is defined since if \(f\in C^+([-\tau, 0)\) then \(f\in L^2([-\tau,0)\). It is relatively straight-forward to verify that \((\cdot, \cdot)_X\) is symmetric, bilinear, and positive definite and thus is an inner product. We will also make use of the norm \(\|\cdot\|_X\) induced from this inner product. Note that \(X\) is \textbf{not} a Banach space since Cauchy sequences might not converge in \(X\). 
+Let \(\Pi_N\) be the associated orthogonal projector of \(\mcH_N\). By the construction of the orthogonal basis \(\{\mcK^\tau_n\}\), we have that \(\mcH_N\subset D(\mcA).\) The \(N\)-dimensional Galerkin approximation of \cref{eq:abstract_ode} is 
+\bea\label{eq:abstract_gal_ode}
+    \frac{\d u_N}{\d t} &= \mcA_N u_N + \Pi_N \mcF(u_N), \\
+    u_N(0) &= \Pi_N u_0,
+\eea
+where \(\mcA_N := \Pi_N\mcA \Pi_N\). The linear operator \(\mcA_N\) on the finite dimensional space \(\mcH_N\) defines the \(C_0\)-semigroup \(e^{\mcA_N t}\). This can be extended to a \(C_0\)-semigroup on \(\mcH\):
+\be
+    T_N(t) u=e^{\mathcal{A}_N t} \Pi_N u +(I-\Pi_N) u, \; u\in \mathcal{H}.
+\ee
+From \cref{eq:abstract_gal_ode}, we derive the variation of constants formula for the Galerkin approximation:
+\be
+    u_N(t) = T_N(t)\Pi_N u_0 + \int_0^t T_N(t-s)\Pi_N\mcF(u_N(t))\d s.
+\ee
 
-From \cite[Thm.~2.4.1]{CZ95}, if \(u_0\in X\), then the solution \(x(t)\) of \cref{eq:dde} with initial conditions \(u_0^D\) and \(u_0^S\) is continuous on \([0,\infty)\). Therefore, \(x_t\) is in \(\mathcal C^+([-\tau, 0))\) for any \(t\in[0,\infty)\). This gives that \(T(t)u_0 = (x_t, x_t(0))\in X\) and that \(T(t)\) maps \(X\) into \(X\). Similarly, we have that \(\Pi_N\) maps \(X\subseteq \mcH\) into \(\mcH_N\) and \(T_N(t)\) maps \(\mcH_N\) into \(\mcH_N\). Hence \(T_N(t)\Pi_N\) maps \(X\) into \(\mcH_N\), which is a subset of \(X\). 
-
-We summarize these results in the following lemma.
-
-\bl
-For any \(t\geq 0\), the operators \(T(t)\) and \(T_N(t)\Pi_N\) map \(X\) into itself.
-\el
-
-%We will use right-continuous functions in \(X\). Need a lemma to show \(T\) and \(T_N\) generate a \(C_0\)-semigroup on \(\mcH\) and stay in \(X\) if \(u_0\in X\).
+By \cite[Lemma~4.3]{CGLW16} and the proof of \cite[Thm.~4.1]{CGLW16}, the results about \(T(t)\) and \(T_N(t)\) hold.
+\bprop
+For \(t>0\) and \(N\in\mathbb N_0\),
+\be
+    \| T_N(t) \|_\mcH , \| T(t) \|_\mcH \leq Me^{\omega t}.
+\ee
+Also, for any \(T>0\),
+\be\label{eq:trotter_kato}
+    \lim_{N\to\infty}\sup_{t\in[0,T]} \| T(t)u - T_N(t)\Pi_Nu \|_\mcH = 0, \quad \forall u\in\mcH.
+\ee
+\eprop
+The proof of \cref{eq:trotter_kato} relies on a version of the Trotter-Kato theorem \cite[Thm.~4.5, p.~88]{P83}.

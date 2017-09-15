@@ -4,9 +4,13 @@
 
 \subsection{Pointwise Convergence in \texorpdfstring{$X$}{X}}
 
-It will be helpful to prove a lemma.
+From \cite[Thm.~2.4.1]{CZ95}, if \(u_0\in X\), then the solution \(x(t)\) of \cref{eq:linear_dde} with initial conditions \(u_0^D\) and \(u_0^S\) is continuous on \([0,\infty)\). This is sufficient to say that \(T(t)u_0 = (x_t, x_t(0))\in X\) and that \(T(t)\) maps \(X\) into \(X\). Similarly, we have that \(\Pi_N\) maps \(X\subseteq \mcH\) into \(\mcH_N\) and \(T_N(t)\) maps \(\mcH_N\) into \(\mcH_N\). Hence \(T_N(t)\Pi_N\) maps \(X\) into \(\mcH_N\), which is a subset of \(X\). We summarize these results in the following lemma.
 \bl
-There is \(C>0\) such that for any \(N\in\mathbb N_0.\)
+For any \(t\geq 0\), the operators \(T(t)\) and \(T_N(t)\Pi_N\) map \(X\) into itself.
+\el
+This justifies the later use of the norm \(\|\cdot\|_X\) on certain functions. It will also be helpful to prove the following lemma.
+\bl
+Let \(u\) be the solution for \cref{eq:abstract_ode} and \(u_N\) the solution for \cref{eq:abstract_gal_ode} for some initial value \(u_0\in X\). There is \(C>0\) such that for any \(N\in\mathbb N_0.\)
 \be
     \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_X \leq C \|u(s) - u_N(s)\|_X,
 \ee
@@ -22,7 +26,7 @@ Note that for the first term on the right-hand side of \eqref{pwx-1}, we have th
 \bea\label{pwx-2}
     \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_\mcH &\leq Me^{\omega(t-s)} \|\mathcal F(u(s)) - \mathcal F(u_N(s))\|_\mcH \\
     &\leq Me^{\omega T} \|\mathcal F(u(s)) - \mathcal F(u_N(s))\|_\mcH \\
-    &= Me^{\omega T} \left|f([u(s)]^D(-\tau)) - f([u_N(s)]^D(-\tau))\right| \\
+    &= Me^{\omega T} \left|F([u(s)]^D(-\tau)) - F([u_N(s)]^D(-\tau))\right| \\
     &\leq \Lip(F) Me^{\omega T} \left|[u(s)]^D(-\tau) - [u_N(s)]^D(-\tau)\right| \\
     &\leq \Lip(F)Me^{\omega T} \|u(s) - u_N(s)\|_X.
 \eea
@@ -35,7 +39,7 @@ For the second term on the right-hand side of \eqref{pwx-1}, we consider first t
 Now consider the case when \(t-s<\tau.\) So we have that
 \bea\label{pwx-4}
     \left|[T_N(t-s)\Pi_N(\mcF(u(s)) - \mcF(u_N(s)))]^D(-\tau)\right| = \left| \left[\Pi_N(\mcF(u(s)) - \mcF(u_N(s)))\right]^D(t-s-\tau)\right| \\
-    = \left|f([u(s)]^D(-\tau)) - f([u_N(s)]^D(-\tau))\right| \cdot \left|S^\tau_N(t-s-\tau)\right|  \hspace{0em} \\
+    = \left|F([u(s)]^D(-\tau)) - F([u_N(s)]^D(-\tau))\right| \cdot \left|S^\tau_N(t-s-\tau)\right|  \hspace{0em} \\
     \leq \Lip(F)\left|[u(s)]^D(-\tau) - [u_N(s)]^D(-\tau)\right|  \hspace{6.85em} \\
     \leq \Lip(F) \|u(s) - u_N(s)\|_X.  \hspace{12.40em} 
 \eea
@@ -106,7 +110,7 @@ We can again apply the definition of \(\|\cdot\|_X\) to get that
 \eea
 For fixed \(t\) and \(s\), the first term of the right-hand side converges to zero. For \(t-s\geq\tau\) the second term will similarly converge to \(0\). For \(t-s<\tau\), the second term will become
 \be
-    |0 - [\Pi_N\mcF(u(s))]^D(t-s-\tau)| = |f([u(s)]^D(-\tau))|\cdot \left|S_N(t-s-\tau)\right|,
+    |0 - [\Pi_N\mcF(u(s))]^D(t-s-\tau)| = |F([u(s)]^D(-\tau))|\cdot \left|S_N(t-s-\tau)\right|,
 \ee
 which converges a.e. to \(0\) by \eqref{eq:pw-conv}. So for fixed \(t\), \(d_N(t,s)\) converges a.e. to \(0\) for \(s\in[0,t]\). Furthermore, we can uniformly bound \(d_N(t, s)\) by \eqref{eq:uniform-bdd}.Thus by the Bounded Convergence Theorem, we have \( \int^t_0 d_N (t, s) \d s \to 0\) as \(N \to \infty.\)
 
