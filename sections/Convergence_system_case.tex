@@ -2,14 +2,21 @@
 
 \section{Uniform Convergence of Galerkin Solutions: System of DDEs case} \label{Sect_convergence_system_case}
 
-
-
-{\alert Some points to be addressed: 
-
-****************************
-
-\bi
-\item Formulate a results about existence and regularity of solutions for the system of DDE \eqref{Eq_DDE_general}.
-\ei
-
-****************************}
+One can show that a similar convergence result holds for Galerkin approximations of 
+\be
+    \frac{\d \boldsymbol{x}(t)}{\d t}  = \boldsymbol{ Ax}(t)  + \boldsymbol {Bx}(t-\tau_p) + \boldsymbol{F} \left(\boldsymbol{x}(t-\tau_1), \cdots, \boldsymbol{x}(t-\tau_p)\right),
+\ee
+where \(\boldsymbol x(t)\) is a function from \([-\tau_p,\infty)\) to \(\mathbb R^d\) and \(\boldsymbol{F}:\mathbb R^{dp}\to \mathbb R^d\) is Lipschitz continuous. Instead of using \(\mcK_n^\tau\), we use the \(d\)-dimensional versions \(\mathbb K^\tau_n\) as introduced in \cite[Section~3.3]{CGLW16}. The results in \cref{prop:uniform-conv}, \cref{eq:uniform-bdd}, and \cref{eq:pw-conv} hold in appropriate ways for \(\mathbb K_n\) and can be proven using the one-dimensional case. Then the uniform convergence of the Galerkin approximations can be proven in an analogous way to \cref{thm:uniform_conv}. Namely, we introduce the inner product space
+\be
+    X_p := C^{+}([-\tau_p, 0);\mathbb R^d) \times \mathbb R^d
+\ee
+with the inner product 
+\be
+    (\Phi, \Psi) := (\Phi^S,\Psi^S)_{\R^d} + \frac 1 \tau (\Phi^D, \Psi^D)_{L^2([-\tau, 0) ; \R^d)} + \sum_{i=1}^p(\Phi^D(-\tau_i),\Psi^D(-\tau_i))_{\R^d}, \quad \Phi,\Psi\in X.
+\ee
+The above proofs can be edited to compensate for this new inner product. For instance, the line \cref{eq:pwx-1} would instead become
+\beas
+    \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_X^2 &= \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_\mcH^2 \\ 
+    &+ \sum_{i=1}^p\left|[T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))]^D(-\tau_i)\right|^2,
+\eeas
+where we bound each \(\left|[T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))]^D(-\tau_i)\right|\) in a similar way to how the single delay term was bounded.

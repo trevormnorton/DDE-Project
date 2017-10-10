@@ -18,11 +18,11 @@ where \(t\in [0,T]\) and \(s\in[0,t]\).
 \el
 \bp
 We have that 
-\bea\label{pwx-1}
+\bea\label{eq:pwx-1}
     \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_X^2 &= \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_\mcH^2 \\ 
     &+ \left|[T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))]^D(-\tau)\right|^2.
 \eea
-Note that for the first term on the right-hand side of \eqref{pwx-1}, we have that 
+Note that for the first term on the right-hand side of \cref{eq:pwx-1}, we have that 
 \bea\label{pwx-2}
     \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_\mcH &\leq Me^{\omega(t-s)} \|\mathcal F(u(s)) - \mathcal F(u_N(s))\|_\mcH \\
     &\leq Me^{\omega T} \|\mathcal F(u(s)) - \mathcal F(u_N(s))\|_\mcH \\
@@ -30,7 +30,7 @@ Note that for the first term on the right-hand side of \eqref{pwx-1}, we have th
     &\leq \Lip(F) Me^{\omega T} \left|[u(s)]^D(-\tau) - [u_N(s)]^D(-\tau)\right| \\
     &\leq \Lip(F)Me^{\omega T} \|u(s) - u_N(s)\|_X.
 \eea
-For the second term on the right-hand side of \eqref{pwx-1}, we consider first the case when \(t-s\geq \tau.\) Then
+For the second term on the right-hand side of \cref{eq:pwx-1}, we consider first the case when \(t-s\geq \tau.\) Then
 \bea\label{pwx-3}
     \left|[T_N(t-s)\Pi_N(\mcF(u(s)) - \mcF(u_N(s)))]^D(-\tau)\right| &\leq \|T_N(t-s-\tau)\Pi(\mcF(u(s)) - \mcF(u_N(s)))\|_\mcH \\
     &\leq Me^{\omega T} \|\mathcal F(u(s)) - \mathcal F(u_N(s))\|_\mcH \\
@@ -47,7 +47,7 @@ Note that since \(M\geq 1\) and \(\omega T \geq 0\), so \(\Lip(F) \leq \Lip(F)Me
 \be
     C := \sqrt 2 \cdot \Lip(F)Me^{\omega T}
 \ee
-and apply \eqref{pwx-2}, \eqref{pwx-3}, and \eqref{pwx-4} to \eqref{pwx-1}, then we get that 
+and apply \eqref{pwx-2}, \eqref{pwx-3}, and \eqref{pwx-4} to \cref{eq:pwx-1}, then we get that 
 \be
     \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_X \leq C\|u(s) - u_N(s)\|_X.
 \ee
@@ -112,7 +112,7 @@ For fixed \(t\) and \(s\), the first term of the right-hand side converges to ze
 \be
     |0 - [\Pi_N\mcF(u(s))]^D(t-s-\tau)| = |F([u(s)]^D(-\tau))|\cdot \left|S_N(t-s-\tau)\right|,
 \ee
-which converges a.e. to \(0\) by \eqref{eq:pw-conv}. So for fixed \(t\), \(d_N(t,s)\) converges a.e. to \(0\) for \(s\in[0,t]\). Furthermore, we can uniformly bound \(d_N(t, s)\) by \eqref{eq:uniform-bdd}.Thus by the Bounded Convergence Theorem, we have \( \int^t_0 d_N (t, s) \d s \to 0\) as \(N \to \infty.\)
+which converges a.e. to \(0\) by \eqref{eq:pw-conv}. So for fixed \(t\), \(d_N(t,s)\) converges a.e. to \(0\) for \(s\in[0,t]\). Furthermore, we can uniformly bound \(d_N(t, s)\) by \eqref{eq:uniform-bdd}. Thus by the Bounded Convergence Theorem, we have \( \int^t_0 d_N (t, s) \d s \to 0\) as \(N \to \infty.\)
 
 The second convergence follows by the observations that \(\int_0^\cdot d_N(\cdot,r)\d r\) converges pointwise to \(0\) by our earlier work and can uniformly bounded on \([0,t]\). This allows us to apply the Bounded Convergence Theorem to get that \(\int_0^t\int_0^s d_N(s,r)\d r \d s \to 0\) as \(N\to\infty\).
 \ep
@@ -133,7 +133,7 @@ Apply propositions \eqref{prop:pwx-con-1} and \eqref{prop:pwx-con-2} to the ineq
 \bl
 The following convergences hold:
 \be\label{conv1}
-    \lim_{N\to\infty} \int_0^T \left| [u_N(s)]^D(-\tau) - [u(s)]^D(-\tau) \right|^2 \d s,
+    \lim_{N\to\infty} \int_0^T \left| [u_N(s)]^D(-\tau) - [u(s)]^D(-\tau) \right|^2 \d s = 0,
 \ee
 and 
 \be\label{conv2}
@@ -154,7 +154,7 @@ It is a simple corollary of \cref{thm:pointwise} that \(\|[u_N(t)]^D - [u(t)]^D]
 
 To prove the other convergence, note that 
 \bea
-    \int_0^T \|\mathcal F(u_N(s)) - \mathcal F(u(s)) \|_{\mathcal H} \d s &= \int_0^T \left| f\left([u_N(s)]^D(-\tau)\right) - f\left([u(s)]^D(-\tau)\right)\right|\d s \\
+    \int_0^T \|\mathcal F(u_N(s)) - \mathcal F(u(s)) \|_{\mathcal H} \d s &= \int_0^T \left| F\left([u_N(s)]^D(-\tau)\right) - F\left([u(s)]^D(-\tau)\right)\right|\d s \\
     &\leq \Lip(F) \int_0^T \left| [u_N(s)]^D(-\tau)- [u(s)]^D(-\tau)\right|\d s \\
     &=\Lip(F) \| [u_N(\cdot)]^D(-\tau)- [u(\cdot)]^D(-\tau) \|_{L^1([0,T];\mathbb R)}.
 \eea
@@ -256,7 +256,7 @@ Let \(\epsilon > 0\). We wish to choose \(\delta>0\) such that \(\|u_n(t) - u_n(
 where \(|t-t'|<\delta^*\) and \(n\geq N\). For each \(n\in\mathbb N_0\) that are less than \(N\), we pick \(\delta_n>0\) such that \(\|u_n(t) - u_n(t')\|_{\mathcal H} < \epsilon\) for \(|t-t'|<\delta_n\). This is possible since \(u_n\) is uniformly continuous on \([0,T]\). Let \(\delta = \min\{\delta^*, \delta_0,\ldots, \delta_{N-1}\}\). Then \(\delta\) satisfies the challenge from \(\epsilon.\) This proves uniform equicontinuity.
 \ep
 
-\bt
+\bt\label{thm:uniform_conv}
 For \(T>0\), we have that
 \be
     \lim_{N\to\infty} \sup_{t\in[0,T]} \| u_N(t) - u(t) \|_\mcH = 0.
