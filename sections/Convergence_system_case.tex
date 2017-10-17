@@ -2,11 +2,13 @@
 
 \section{Uniform Convergence of Galerkin Solutions: System of DDEs case} \label{Sect_convergence_system_case}
 
+\subsection{Multidimensional Case with Single Linear Delay Term}
+
 One can show that a similar convergence result holds for Galerkin approximations of 
 \be
     \frac{\d \boldsymbol{x}(t)}{\d t}  = \boldsymbol{ Ax}(t)  + \boldsymbol {Bx}(t-\tau_p) + \boldsymbol{F} \left(\boldsymbol{x}(t-\tau_1), \cdots, \boldsymbol{x}(t-\tau_p)\right),
 \ee
-where \(\boldsymbol x(t)\) is a function from \([-\tau_p,\infty)\) to \(\mathbb R^d\) and \(\boldsymbol{F}:\mathbb R^{dp}\to \mathbb R^d\) is Lipschitz continuous. Instead of using \(\mcK_n^\tau\), we use the \(d\)-dimensional versions \(\mathbb K^\tau_n\) as introduced in \cite[Section~3.3]{CGLW16}. The results in \cref{prop:uniform-conv}, \cref{eq:uniform-bdd}, and \cref{eq:pw-conv} hold in appropriate ways for \(\mathbb K_n\) and can be proven using the one-dimensional case. Then the uniform convergence of the Galerkin approximations can be proven in an analogous way to \cref{thm:uniform_conv}. Namely, we introduce the inner product space
+where \(\boldsymbol x(t)\) is a function from \([-\tau_p,\infty)\) to \(\mathbb R^d\) and \(\boldsymbol{F}:\mathbb R^{dp}\to \mathbb R^d\) is Lipschitz continuous. Instead of using \(\mcK_n^\tau\), we use the \(d\)-dimensional versions \(\mathbb K^\tau_n\) as introduced in \cite[Section~3.3]{CGLW16}. The results in \cref{prop:uniform-conv}, \cref{eq:uniform-bdd}, and \cref{eq:pw-conv} hold in appropriate ways for \(\mathbb K_n^\tau\) and can be proven using the one-dimensional case. Then the uniform convergence of the Galerkin approximations can be proven in an analogous way to \cref{thm:uniform_conv}. Namely, we introduce the inner product space
 \be
     X_p := C^{+}([-\tau_p, 0);\mathbb R^d) \times \mathbb R^d
 \ee
@@ -15,8 +17,277 @@ with the inner product
     (\Phi, \Psi) := (\Phi^S,\Psi^S)_{\R^d} + \frac 1 \tau (\Phi^D, \Psi^D)_{L^2([-\tau, 0) ; \R^d)} + \sum_{i=1}^p(\Phi^D(-\tau_i),\Psi^D(-\tau_i))_{\R^d}, \quad \Phi,\Psi\in X.
 \ee
 The above proofs can be edited to compensate for this new inner product. For instance, the line \cref{eq:pwx-1} would instead become
-\beas
+\bea
     \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_X^2 &= \|T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))\|_\mcH^2 \\ 
     &+ \sum_{i=1}^p\left|[T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))]^D(-\tau_i)\right|^2,
-\eeas
+\eea
 where we bound each \(\left|[T_N(t-s)\Pi_N(\mathcal F(u(s)) - \mathcal F(u_N(s)))]^D(-\tau_i)\right|\) in a similar way to how the single delay term was bounded.
+
+\subsection{One Dimensional Case with Multiple Linear Delay Terms}
+
+We now consider the following one-dimensional DDE given by
+\bea
+    \frac{\d x(t)}{\d t} &= ax(t) + \sum_{i=1}^p b_i x(t-\tau_i) + F(x(t-\tau_1), x(t-\tau_2), \ldots, x(t-\tau_p)), \quad t > 0\\
+    x(0) &= \alpha,  \\
+    x(t) &= \varphi(t), \quad t\in [-\tau_p, 0)
+\eea
+where \(x(t)\) is a function from \([-\tau_p, \infty)\) to \(\R\) and \(F:\R^p\to\R\) is Lipschitz continuous. We embed this into the following multidimensional problem:
+\bea
+    \frac{\d\boldsymbol{ x}(t)}{\d t} &= \A \boldsymbol{x}(t) +   \B\,\begin{bmatrix}x_1(t-\tau_1) \\ x_2(t-\tau_2) \\ \vdots \\ x_p(t-\tau_p) \end{bmatrix} + \boldsymbol{F}(\boldsymbol x_t), & t&>0\\
+    \boldsymbol{x}(0) &= [\alpha, \alpha, \cdots, \alpha]^T, \\
+    x_1(\theta) &= \varphi(\theta), & -\tau_1\leq \theta&<0 \\
+    x_2(\theta) &= \varphi(\theta), &  -\tau_2\leq \theta&<0 \\
+    &\ \,  \vdots \\
+    x_p (\theta) &= \varphi(\theta), &  -\tau_p\leq \theta&<0
+\eea
+where \(\A = a \boldsymbol{I}\) with \(\boldsymbol{I}\) the identity matrix, \(\B = \begin{bmatrix}1 & \cdots & 1\end{bmatrix}^T\begin{bmatrix}b_1 & \cdots & b_p\end{bmatrix}\), 
+\be
+    \boldsymbol F(\x_t) = \begin{bmatrix}F(x_1(t-\tau_1),\, x_2(t-\tau_2),\, \ldots,\, x_p(t-\tau_p)) \\ \vdots \\ F(x_1(t-\tau_1),\, x_2(t-\tau_2),\, \ldots,\, x_p(t-\tau_p))\end{bmatrix},
+\ee
+and \(x_i\) the \(i\)th component of \(\boldsymbol{x}\). Note that any \(x_i\) will satisfy the one-dimensional problem. Denote \(\boldtau = (\tau_1, \tau_2,\cdots,\tau_p)\). We may reference 
+\be
+    \begin{bmatrix}x_1(t-\tau_1) & x_2(t-\tau_2) & \cdots & x_p(t-\tau_p) \end{bmatrix}^T
+\ee
+by an abuse of notation, \(\boldsymbol{x}(t-\boldtau)\). We will prove results for the more general DDE given by
+\bea\label{eq:multiple-delay-dde}
+    \frac{\d\boldsymbol{ x}(t)}{\d t} &= \A \boldsymbol{x}(t) +   \B\boldsymbol{x}(t-\boldtau), & t&>0\\
+    \boldsymbol{x}(0) &= \boldgamma, \\
+    x_1(\theta) &= f_1(\theta), & -\tau_1\leq \theta&<0 \\
+    x_2(\theta) &= f_2(\theta), &  -\tau_2\leq \theta&<0 \\
+    &\ \,  \vdots \\
+    x_p (\theta) &= f_p(\theta), &  -\tau_p\leq \theta&<0
+\eea
+where \(\A, \B\in\mathbb R^{p\times p}\), \(\boldgamma\in\R^p\) and \(f_i\in L^2([-\tau_i, 0);\mathbb R).\) Namely, we shall show that we can approximate the solution of the above by Galerkin problems using vectorized Koornwinder polynomials. We can reformulate the above DDE to be in the form of an abstract Cauchy problem by defining the linear operator \(\mcA: \mathcal D(\mcA) \to \mcH^{\boldtau}\) by 
+\be\label{eq:multiple-delay-generator}
+    \mcA\left(\begin{array} c \Psi^D \\  \Psi^S\end{array} \right):= \left(\begin{array} c \frac{d^+\Psi^D}{d\theta} \\ \boldsymbol A\Psi^S +  \boldsymbol B\Psi^D(-\boldtau)\end{array}\right)
+\ee
+with the domain of \(\mcA\) given by 
+\be\label{eq:multiple-delay-domain}
+    \mathcal D(\mcA) = \{(\Psi^D, \Psi^S)\in \mcH^{\boldtau}\, :\, \Psi_i^D\in H^1([-\tau_i, 0);\mathbb R),\, \lim_{\theta\to0^-} \Psi^D_i(\theta) = \Psi_i^S,\, \mbox{ for } i=1,\cdots, p\}.
+\ee
+We also define the subspace 
+\be\label{nspace}
+    \mcH_N^{\boldtau} := \mathrm{span}\{\mathbb K^{\boldtau}_1, \cdots, \mathbb K^{\boldtau}_{Np}\},
+\ee
+i.e., it is the subspace of vectorized Koornwinder polynomials with degree less than or equal to \(N\). To get the \(Np\)-dimensional Galerkin approximation, we define the following operator
+\be\label{GalOp}
+    \mcA_N := \Pi_N\mcA\Pi_N,
+\ee
+where 
+\be
+    \Pi_N: \mcH^{\boldtau} \to \mcH_N^{\boldtau}
+\ee
+is the orthogonal projector into \(\mcH^{\boldtau}_N\). Note that \(\mathbb K^\tau_j\in\mathcal D(\mcA )\) for each \(j\in\mathbb N\), so \(\mcH^{\boldtau}_N\subset\mathcal D(\mcA)\) and the operator in \eqref{GalOp} is well-defined. We can extend \(e^{\mcA_N t}\) to a \(C_0\)-semigroup \(T_N(t)\) on \(\mcH\) as follows:
+\be
+    T_N(t)u = e^{\mcA_N t}\Pi_Nu + (I-\Pi_N)u, \qquad u\in\mcH.
+\ee
+To apply the results given in \cite[Thm.~4.1]{CGLW16}, we need to prove the necessary assumptions about \(\mcA\) and \(\mcA_N\). That is, \(\mcA\) generates a \(C_0\) semigroup \(T(t)\) and
+\ben[label= \textbf{(A\arabic*)}]
+\item The following uniform bound is satisfied by \(\{T_N(t)\}_{N\geq0, t\geq 0}\)
+\be
+    \| T_N(t) \| \leq Me^{\omega t}, \qquad N\geq 0, \qquad t\geq 0
+\ee
+where \(\| T_N(t) \| = \sup\{ \| T_N(t) u \|_{\mcH^{\boldtau}} \mid  \|u\|_{\mcH^{\boldtau}} = 1, u \in \mcH^{\boldtau} \}\).
+\item The following convergence holds:
+\be
+    \lim_{N\to\infty} \| \mcA_N u - \mcA u \|_{\mcH^{\boldtau}} = u, \qquad \forall u\in\mcH^{\boldtau}.
+\ee
+\een 
+We first show that \(\mcA\) is an infinitesimal generator of a \(C_0\) semigroup. The proof will be similar to \cite[Thm 2.4.6]{CZ95}. We have the following result by slightly altering the proof from \cite[Thm 2.4.1]{CZ95}:
+
+\bt
+Consider the DDE \cref{eq:multiple-delay-dde}. For every \(\boldsymbol{\gamma}\in\mathbb R^p\) and for any choices of \(f_i\in L^2([-\tau_i,0);\mathbb R)\) for each \(i=1,2,\cdots, p\),  there exists a unique function \( \boldsymbol{x}(\cdot)\) on \([0,\infty)\) that is absolutely continuous and satisfies \cref{eq:multiple-delay-dde} almost everywhere. This function is called the solution of \cref{eq:multiple-delay-dde}, and it satisfies 
+\be\label{eq:soln}
+    \x(t) = e^{\A t} {\boldgamma}+ \int_0^t e^{\A(t-s)}\boldsymbol{Bx}(s-\boldtau)\, \d s \qquad \mbox{for } t\geq 0.
+\ee
+\et
+
+We shall show that the following holds: 
+\begin{lem}
+If \( x(t)\) is the solution to \cref{eq:multiple-delay-dde}, then the following inequalities hold: 
+\be
+    |\boldsymbol{x}(t)|^2 \leq C_t\left[ |\boldsymbol\gamma|^2 + \sum_{i=1}^p\frac 1 {\tau_i}\|f_i\|^2_{L^2([-\tau_i,0);\mathbb R)}\right]
+\ee
+and 
+\be
+    \int_0^t |\boldsymbol{x}(s)|^2\, \d s \leq D_t\left[ |\boldsymbol{\gamma}|^2 + \sum_{i=1}^p\frac 1 {\tau_i}\|f_i\|^2_{L^2([-\tau_i,0);\mathbb R)}\right],
+\ee
+where \(C_t\) and \(D_t\) are constants  that depend only on \(t\). 
+\end{lem}
+
+\begin{proof}
+We know that for \(e^{\A t}\) there exists \(M_0>0\) and \(\omega>0\) such that \(|e^{\A t}|\leq M_0e^{\omega t}\). Let \[M:=\max\{M_0, |\B|\}.\] Then from \cref{eq:soln} we have
+\bea\label{ineq1}
+    | \x(t) | &\leq |\boldgamma||e^{\A t}| + \left|\int_0^t  e^{\A t}\B \x(s-\boldtau)\d s\right| \\
+    &\leq M_0|\boldgamma|e^{\omega t} + \int_0^t M_0e^{\omega(t-s)}| \B||\x(s-\boldtau)| \d s \\
+    &\leq M|\boldgamma|e^{\omega t} + M^2\int_0^t e^{\omega(t-s)}|\x(s-\boldtau)| \d s \\
+    &\leq M|\boldgamma|e^{\omega t} + M^2\sum_{i=1}^p\int_0^t e^{\omega(t-s)}|x_i(s-\tau_i)| \d s \\
+    &= M|\boldgamma|e^{\omega t} + M^2e^{\omega t}\sum_{i=1}^p\int_{-\tau_i}^{t-\tau_i} e^{-\omega(\theta+\tau_i)}|x_i(\theta)| \d s. \\
+\eea
+We also have that for \(i=1,2,\cdots, p\)
+\bea\label{ineq2}
+    \int_{-\tau_i}^{t-\tau_i} e^{-\omega(\theta+\tau_i)}|x_i(\theta)|\,d\theta &\leq \int_{-\tau_i}^0e^{-\omega(\theta+\tau_i)}|x_i(\theta)|\,d\theta + \int_0^te^{-|a|(\theta+\tau_i)}|x_i(\theta)|\d\theta \\
+    &= \int_{-\tau_i}^0e^{-\omega(\theta+\tau_i)}|f_i(\theta)|\,d\theta + \int_0^te^{-|a|(\theta+\tau_i)}| x_i(\theta)|\d\theta \\
+    &\leq \int_{-\tau_i}^0|f_i(\theta)|\,d\theta + \int_0^te^{-\omega(\theta+\tau_i)}| x_i(\theta)|\d\theta \\
+    &\leq \sqrt{\tau_i} \|f_i\|_{L^2([-\tau_i, 0);\mathbb R)} +  \int_0^te^{-\omega(\theta+\tau_i)}| x_i(\theta)|\d\theta \\
+    &\leq \sqrt{\tau_i} \|f_i\|_{L^2([-\tau_i, 0);\mathbb R)} +  \int_0^te^{-\omega\theta}| x_i(\theta)|\d\theta \\
+    &\leq \sqrt{\tau_i} \|f_i\|_{L^2([-\tau_i, 0);\mathbb R)} +  \int_0^te^{-\omega\theta}| x_i(\theta)|\d\theta.
+\eea
+From \eqref{ineq1} and \eqref{ineq2} we have 
+
+\bea
+    | \x(t) | &\leq M|\boldgamma|e^{\omega t} + M^2e^{\omega t}\sum_{i=1}^p\left[\sqrt{\tau_i} \|f_i\|_{L^2([-\tau_i, 0);\mathbb R)} +  \int_0^te^{-\omega\theta}| \x(\theta)|\d\theta \right] \\
+    &\leq M|\boldgamma|e^{\omega t} + M^2e^{\omega t}\sum_{i=1}^p\left[\sqrt{\tau_i} \|f_i\|_{L^2([-\tau_i, 0);\mathbb R)} \right]+  M^2e^{\omega t}p\int_0^te^{-\omega\theta}| \x(\theta)|\d\theta.
+\eea
+Set \(\alpha = M|\boldgamma| + M^2\sum_{i=1}^p\left[\sqrt{\tau_i} \|f_i\|_{L^2([-\tau_i, 0);\mathbb R)} \right]\), \(\beta = M^2p\) and \(g(t) = e^{-\omega t}| \x(t)|\), we get the following inequality
+\be
+    g(t) \leq \alpha + \beta\int_0^t g(\theta) \d\theta.
+\ee
+Applying the integral form of Gr\"onwall's inequality yields 
+\be
+    g(t) \leq \alpha e^{\beta t}. 
+\ee
+Thus 
+\bea
+    | \x(t) | &\leq e^{(M^2p + \omega)t}\left[ M|\boldgamma| + M^2\sum_{i=1}^p\sqrt{\tau_i} \|f_i\|_{L^2([-\tau_i, 0);\mathbb R)}\right] \\
+    &\leq e^{(M^2p + \omega)t}\left[ M|\boldgamma| + M^2\tau_p\sum_{i=1}^p\frac 1 {\sqrt{\tau_i}} \|f_i\|_{L^2([-\tau_i, 0);\mathbb R)}\right] \\
+    &\leq e^{(M^2p + \omega)t}\max\{M, M^2\tau_p\}\left[|\boldgamma| + \sum_{i=1}^p\frac 1 {\sqrt{\tau_i}} \|f_i\|_{L^2([-\tau_i, 0);\mathbb R)}\right] \\
+\eea
+and squaring both sides yields
+\be
+    | \x(t)|^2 \leq e^{2(M^2p + \omega)t}(\max\{M, M^2\tau_p\})^2\left[|\boldgamma|^2 + \sum_{i=1}^p\frac 1 {\tau_i} \|f_i\|^2_{L^2([-\tau_i, 0);\mathbb R)}\right].
+\ee 
+This gives the first inequality, and integrating gives the second inequality.
+\end{proof}
+
+The following theorems are proven similarly to \cite[Thm 2.4.4]{CZ95} and \cite[Thm 2.4.6]{CZ95}.
+\bt
+Let the operator \(T(t)\) be defined by
+\be\label{operator}
+    T(t)\left(\begin{array}{c} f(\cdot) \\ \boldgamma \end{array}\right) := \left(\begin{array} c \x(t+\cdot) \\ \x(t)\end{array}\right),
+\ee
+where \(\x(\cdot)\) is the solution to \cref{eq:multiple-delay-dde}. Then \(T(t)\) for \(t\geq 0\) satisfies:
+\begin{enumerate}[label=\roman*.]
+\item \(T(t)\in\mathcal L(\mcH^{\boldtau})\) for all \(t\geq 0\);
+\item \(T(t)\) is a \(C_0-\)semigroup on \(\mcH^{\boldtau}\).
+\end{enumerate}
+\et
+
+\bt
+Consider the \(C_0\)-semigroup defined by \eqref{operator}. Its infinitesimal generator is given by \cref{eq:multiple-delay-generator} with domain \cref{eq:multiple-delay-domain}.
+\et
+The assumption given by \textbf{(A2)} is proven nearly identically to \cite[Lem.~4.1]{CGLW16}. The assumption \textbf{(A3)} requires more details but follows a similar argument to those given in \cite[Lem.~4.2, Lem.~4.3]{CGLW16}.
+\bprop
+Let \(\mcA\) be defined such as in \cref{eq:multiple-delay-generator}. Then 
+\be
+    \iph {\mcA\Psi} {\Psi} \leq \omega\|\Psi\|^2_{\mcH}, \quad \forall\Psi\in\mathcal D(\mcA),
+\ee
+with 
+\be\label{eq:omega}
+    \omega = \left(\frac 1 {2\tau_1} + |\A| + \frac{\tau_p} 2 |\B|^2\right).
+\ee
+\eprop
+
+\bp
+Let \(\Psi\in\mathcal D(\mcA)\). By the definition of \(\mcA\), we have
+\be
+    \iph {\mcA \Psi} {\Psi} = \underbrace{\sum_{i=1}^p \frac 1 {\tau_i} \int_{-\tau_i}^0 \frac{\d^+\Psi_i^D}{\d\theta}(\theta)\Psi_i^D(\theta)\d\theta}_\text{(1)} + \underbrace{\ip {\A\Psi^S} {\Psi^S} }_\text{(2)}+ \underbrace{\ip {\B\Psi^D(-\tau)}{\Psi^S}}_\text{(3)}.
+\ee
+\ben[label=(\arabic*)]
+\item For \(i=1,2,\ldots, p\), we have 
+\bea
+    \frac 1 {\tau_i} \int_{-\tau_i}^0 \frac{\d^+\Psi_i^D}{\d\theta}(\theta)\Psi_i^D(\theta)\d\theta &= \frac 1 {2\tau_i}\left((\Psi_i^S)^2 - (\Psi^D_i(-\tau_i))^2 \right) \\
+    &\leq \frac 1 {2\tau_1}(\Psi_i^S)^2 - \frac 1 {2\tau_p}(\Psi_i^D(-\tau_i))^2.
+\eea
+So 
+\be
+    \sum_{i=1}^p\frac 1 {\tau_i} \int_{-\tau_i}^0 \frac{\d^+\Psi_i^D}{\d\theta}(\theta)\Psi_i^D(\theta)\d\theta \leq \frac 1 {\tau_1} |\Psi^S|^2 - \frac 1 {2\tau_p}|\Psi^D(-\tau)|^2.
+\ee
+\item We have 
+\be
+    \ip {\A\Psi^S} {\Psi^S} \leq |\A||\Psi^S|^2.
+\ee
+\item We have 
+\bea
+    \ip{\B\Psi^D(-\tau)}{\Psi^S} &\leq |\B||\Psi^D(-\tau)||\Psi^S| \\
+    &= \left(\frac 1 {\sqrt{\tau_p}} |\Psi^D(-\tau)|\right)\left(\sqrt{\tau_p} |\B| |\Psi^S|\right)\\
+    &\leq \frac{|\Psi^D(-\tau)|^2}{2\tau_p} + \frac{\tau_p|\B|^2|\Psi^S|^2}{2}.
+\eea
+\een
+Thus from (1), (2), and (3), we have that 
+\bea
+    \iph {\mcA \Psi} {\Psi} &=  \left(\frac 1 {2\tau_1} + |\A| + \frac{\tau_p}{2}|\B|^2 \right)|\Psi^S|^2 \\
+    &\leq  \left(\frac 1 {2\tau_1} + |\A| + \frac{\tau_p}{2}|\B|^2 \right) \|\Psi\|^2_{\mcH},
+\eea
+as desired.
+\ep
+
+
+We now prove the following statement:
+
+\bprop
+Let  \(\mcA\) be defined as in \cref{eq:multiple-delay-generator}. Then, the linear semigroups $T(t)$ and $T_N(t)$ generated respectively by \(\mcA\) and \(\mcA_N\)  defined in \eqref{GalOp},  satisfy 
+\be\label{stable_estimates}
+    \|T(t)\| \le e^{\omega t} \quad \text{ and }  \quad \|T_N(t)\| \le e^{\omega t}, \qquad t \ge 0,
+\ee
+with \(\omega\) given by \cref{eq:omega}.
+\eprop
+
+\bp
+We have that \(T(t)\) is a \(C_0\)-semigroup with infinitesimal generator \(\mcA\). By \cite[Thm. 2.4 c) p.5]{P83}, it follows that \(T(t)u_0\in \mathcal D(\mcA)\) for all \(u_0\in\mathcal D(\mcA)\) and that 
+\be
+    \frac{\d}{\d t} T(t)u_0 = \mathcal{A} T(t) u_0,   \qquad \Forall u_0 \in \mathcal{A}, \; t \ge 0.
+\ee
+
+Thus 
+\bea
+    \frac \d {\d t} \|T(t) u_0\|^2_{\mcH} &= 2\iph{\mcA T(t)u_0}{T(t)u_0} \\
+    &\leq 2\omega\|T(t)u_0\|^2_{\mcH},
+\eea
+for any \(u_0\in\mathcal D(\mcA).\) Applying Gronwall's inequality and taking the square root of both sides gives
+\be
+    \|T(t)u_0\|_{\mcH}\leq  e^{\omega t} \|u_0\|_{\mcH},
+\ee
+for \(u_0\in\mathcal D(\mcA).\) For \(x\in\mcH\), since \(\mathcal D(\mcA)\) is dense in \(\mcH\) we can pick \(\{u_n\}_{n=1}^\infty\subset \mathcal D(\mcA)\) where \(u_n\to x\) in \(\mcH\). Thus
+\bea
+    \|T(t)x\|_{\mcH} &= \|T(t)(x-u_n+u_n)\|_{\mcH} \\
+    &\leq \|T(t)\|_{\mcH}\cdot \|x-u_n\|_{\mcH} + e^{\omega t} \|u_n\|,
+\eea
+where the first term on the right goes to \(0\) and the second term on the right goes to \(e^{\omega t}\|x\|_{\mcH}\) as \(n\to\infty\). Thus the inequality holds for all \(x\in \mcH\) and 
+\be
+    \|T(t)\|_{\mcH} \leq e^{\omega t}, \qquad t\geq 0.
+\ee
+For the estimate on \(T_N\), we first note that for \(u_0\in\mcH\)
+\bea
+    \|T_N(t) u_0\|^2_\mathcal{H} & = \big\langle e^{\mathcal{A}_N t} \Pi_N u_0 + (I - \Pi_N) u_0, e^{\mathcal{A}_N t} \Pi_N u_0 + (I - \Pi_N) u_0 \big\rangle_{\mathcal{H}} \\
+    & = \big\langle e^{\mcA_N t} \Pi_N u_0, e^{\mathcal{A}_N t} \Pi_N u_0  \big\rangle_{\mathcal{H}} + \big\langle (I - \Pi_N) u_0, (I - \Pi_N) u_0  \big\rangle_{\mathcal{H}} \\
+    & = \| e^{\mathcal{A}_N t} \Pi_N u_0 \|^2_{\mathcal{H}} + \| (I - \Pi_N) u_0\|^2_{\mathcal{H}}.
+\eea
+Also note for \(\varphi,\psi\in\mcH\) that
+\bea
+    \iph{\Pi_N\varphi}{\psi} &= \iph{\varphi}{\Pi_N\psi} - \iph{(I-\Pi_N)\varphi}{\Pi_N\psi} + \iph{\Pi_N\varphi}{(I-\Pi_N)\psi} \\
+    &=\iph{\varphi}{\Pi_N\psi},
+\eea
+where \((I-\Pi_N)\varphi\) and \((I-\Pi_N)\psi\) are orthogonal to the space \(\mcH_N\) and the inner products \(\iph{(I-\Pi_N)\varphi}{\Pi_N\psi}\) and \(\iph{\Pi_N\varphi}{(I-\Pi_N)\psi}\) evaluate to \(0\). We can thus justify moving \(\Pi_N\) between terms in \(\iph \cdot\cdot.\) Therefore
+\bea
+    \frac\d{\d t} \|T_N(t) u_0\|^2_\mathcal{H} &= \frac\d{\d t}\| e^{\mathcal{A}_N t} \Pi_N u_0 \|^2_{\mathcal{H}} \\
+    &= 2\iph{\mcA_Ne^{\mcA_Nt}\Pi_N u_0}{e^{\mcA_Nt}\Pi_N u_0} \\
+    &= 2\iph{\Pi_N\mcA\Pi_Ne^{\mcA_Nt}\Pi_N u_0}{e^{\mcA_Nt}\Pi_N u_0} \\
+    &= 2\iph{\mcA\Pi_Ne^{\mcA_Nt}\Pi_N u_0}{\Pi_Ne^{\mcA_Nt}\Pi_N u_0} \\
+    &\leq 2\omega\|e^{\mcA_Nt}\Pi_N u_0\|_{\mcH}^2 \\
+    &\leq 2\omega\left(\|e^{\mcA_Nt}\Pi_N u_0\|_{\mcH}^2 + \|(I - \Pi_N) u_0\|^2_\mcH \right) \\
+    &= \|T_N(t) u_0\|^2_\mcH 
+\eea
+Again applying Gronwall's inequality and taking the square root of each side gives 
+\be
+    \|T(t)u_0\|_{\mcH} \leq e^{\omega t} \|u_0\|_\mcH, \qquad u_0\in\mcH,
+\ee
+which implies the desired inequality.
+\ep
+
+Thus we have \textbf{(A2)}. Then the solution of ...
+%% 
+%   Add a discussion about how Galerkin approximations can be used on 
+%%
+
+\subsection{Multidimensional Case with Multiple Linear Delay Terms}

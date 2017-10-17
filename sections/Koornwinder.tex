@@ -215,3 +215,59 @@ Also, for any \(T>0\),
 \ee
 \eprop
 The proof of \cref{eq:trotter_kato} relies on a version of the Trotter-Kato theorem \cite[Thm.~4.5, p.~88]{P83}.
+
+
+\subsection{Vectorized Koornwinder Polynomials}
+We now wish to vectorize the polynomials from the previous subsection so that they form an orthogonal basis for 
+\be
+    \mcH^{\boldtau} :=  L^2([-\tau_1,0);\mathbb R) \times \cdots \times L^2([-\tau_p, 0); \mathbb R) \times \mathbb R^p,
+\ee
+where \(\boldtau = (\tau_1, \tau_2,\cdots, \tau_p)\) with \(0<\tau_1\leq\tau_2\leq\cdots\leq\tau_p\). The inner product of this space is given by
+\be
+    \ip{\Psi}{\Phi}_{\mcH^{\boldtau}} = \sum_{i=1}^p \frac 1 {\tau_i}\int_{-\tau_i}^0 \Psi^D_i(\theta)\Phi^D_i(\theta) \d\theta + \ip{\Psi^S}{\Phi^S}, \qquad \forall\Psi,\Phi\in\mcH^{\boldtau}.
+\ee
+The construction will be similar to that in \cite[Section~3.3]{CGLW16}. For \(j\in\mathbb N\), let 
+\be 
+    d_j = \left\lfloor \frac{j-1} p\right\rfloor
+\ee 
+and let \[r_j = \begin{cases} \mbox{mod}(j, p), & \mbox{ if } \mod(j,p) \neq 0 \\ p, & \mbox{otherwise} \end{cases}.\] Define 
+\be
+    \mathbf{K}_j^{\boldtau} := (\underbrace{0,\ldots,0,}_\text{$r_j$ - 1 entries} K_{d_j}^{\tau_{r_j}},  \underbrace{0, \ldots, 0}_\text{$p-r_j$ entries}). 
+\ee
+We shall also define
+\be
+    \mathbf{K}_j^{\boldtau}(0) := (\underbrace{0,\ldots,0,}_\text{\(r_j\) - 1 entries} K_{d_j}^{\tau_{r_j}}(0),  \underbrace{0, \ldots, 0}_\text{\(p-r_j\) entries}). 
+\ee
+We introduce 
+\be
+    \mathbb K_j^{\boldtau} := (\mathbf K_j^{\boldtau}, \mathbf K_j^{\boldtau}(0)),\qquad j\in\mathbb N.
+\ee
+One can check that \(\{\mathbb K_j^{\boldtau}: j\in\mathbb N\}\) forms an orthogonal basis for \(\mcH^{\boldtau}\). We define 
+\be
+    \mathcal X := L^2([-\tau_1,0);\mathbb R) \times \cdots \times L^2([-\tau_p,0);\mathbb R)
+\ee 
+and 
+\be
+    \langle f, g\rangle_{\mathcal X} = \sum_{i=1}^p \frac 1 {\tau_i} \int_{-\tau_i}^0 f(\theta)g(\theta)\d\theta,
+\ee
+i.e., \(\mathcal X\) is the delay part of \(\mcH^{\boldtau}\). 
+\bprop
+The following convergence results hold for any \(f\in\mathcal X\) and \(\alpha\in\mathbb R^p\):
+\bea
+    &\sum_{j=1}^\infty \frac{\langle\alpha, \mathbf{K}_j^{\boldtau}(0)\rangle}{\|\mathbb K _j^{\boldtau}\|_{\mathcal H}}\mathbf K_j^{\boldtau} = 0 \quad \mbox{ with respect to $\|\cdot\|_{\mathcal X}$;} \\
+    &\sum_{j=1}^\infty \frac{\langle\alpha, \mathbf{K}_j^{\boldtau}(0)\rangle}{\|\mathbb K _j^{\boldtau}\|_{\mathcal H}}\mathbf K_j^{\boldtau}(0) = \alpha; \\
+    &\sum_{j=1}^\infty \frac{\langle\alpha, \mathbf{K}_j^{\boldtau}\rangle_{\mathcal X}}{\|\mathbb K _j^{\boldtau}\|_{\mathcal H}}\mathbf K_j^{\boldtau} = f \quad \mbox{ with respect to $\|\cdot\|_{\mathcal X}$; and }  \\
+    &\sum_{j=1}^\infty \frac{\langle\alpha, \mathbf{K}_j^{\boldtau}\rangle_{\mathcal X}}{\|\mathbb K _j^{\boldtau}\|_{\mathcal H}}\mathbf K_j^{\boldtau}(0) = 0. \\
+\eea
+\eprop
+
+\bp
+Note that \(\{\mathbb K_j^{\boldtau}: j\in\mathbb N\}\) forms an orthogonal basis for \(\mathcal H\). Then for \(\Psi =(\Psi^D, \Psi^S) \in\mathcal H\), we have the following decomposition
+\bea\label{eq:p-side-comparison}
+    \Psi &= \sum_{j=1}^\infty \frac{\iph \Psi {\mathbb K_j^{\boldtau}}}{\|\mathbb K_j^{\boldtau}\|^2_{\mathcal H}}\mathbb K_j^{\boldtau} \\
+    &= \sum_{j=1}^\infty \left(\ipx {\Psi^D} {\mathbf K_j^{\boldtau}} + \ip {\Psi^S}{\mathbf K^{\boldtau}_j(0)}\right)\frac{\mathbb K_j^{\boldtau}}{\|\mathbb K_j^{\boldtau}\|^2_{\mathcal H}}.
+\eea
+If we set \(\Psi = (\mathbf 0, \alpha) \in\mathcal H_p\) and equalize the functional and numerical parts of each side of \cref{eq:p-side-comparison}, we get the first two convergence results. Similarly, setting \(\Psi = (f, \mathbf 0)\) and equalizing the functional and numerical parts of \cref{eq:p-side-comparison}, we get the last two convergence results.
+\ep
+
+For the case when \(\boldtau = (\tau, \tau, \cdots, \tau)\) for \(\tau> 0\), we may write \(\mathbb K^\tau_n\) instead of \(\mathbb K^{\boldtau}_n\). In this case, our construction corresponds exactly to the \(\mathbb K^\tau_n\) described in \cite[Section~3.3]{CGLW16}
