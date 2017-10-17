@@ -291,3 +291,21 @@ Thus we have \textbf{(A2)}. Then the solution of ...
 %%
 
 \subsection{Multidimensional Case with Multiple Linear Delay Terms}
+
+Consider the \(d\)-dimensional DDE of the form:
+\be
+    \frac{\d \x(t)}{\d t}  = \A \x(t)  + \sum_{i=1}^p \B_i  \x(t-\tau_i) +  \boldsymbol{F} (\x(t-\tau_1), \cdots, \x(t-\tau_p)).
+\ee
+We can imbed this into a \((d\times p)\)-dimensional problem given by
+\be
+    \begin{bmatrix}\dot{\x}_1(t) \\ \dot{\x}_2(t) \\ \vdots \\ \dot{\x}_p(t)\end{bmatrix} = \widetilde{\A}\begin{bmatrix}{\x}_1(t) \\ {\x}_2(t) \\ \vdots \\ {\x}_p(t)\end{bmatrix} + \widetilde{\B}\begin{bmatrix}{\x}_1(t-\tau_1) \\ {\x}_2(t-\tau_2) \\ \vdots \\ {\x}_p(t-\tau_p)\end{bmatrix} + \begin{bmatrix} \boldsymbol{F} (\x_1(t-\tau_1), \x(t-\tau_2), \cdots, \x_p(t-\tau_p)) \\ \boldsymbol{F} (\x_1(t-\tau_1), \x(t-\tau_2), \cdots, \x_p(t-\tau_p)) \\ \vdots \\ \boldsymbol{F} (\x_1(t-\tau_1), \x(t-\tau_2), \cdots, \x_p(t-\tau_p))\end{bmatrix},
+\ee
+where 
+\be
+    \widetilde{\A} := \begin{bmatrix}\A & & & \\ & \A & & \\ & & \ddots & \\ & & & \A \end{bmatrix} \hspace{2em} \mbox{ and }\hspace{2em} \widetilde{\B} := \begin{bmatrix}\B_1 & \B_2 & \cdots & \B_p \\ \B_1 & \B_2 & \cdots & \B_p \\ \vdots & \vdots & & \vdots \\ \B_1 & \B_2 & \cdots & \B_p\end{bmatrix}.
+\ee
+We can set 
+\be
+    \boldtau = (\underbrace{\tau_1, \cdots, \tau_1}_{\text{\(d\) times}}, \underbrace{\tau_2, \cdots, \tau_2}_{\text{\(d\) times}}, \cdots, \underbrace{\tau_p, \cdots, \tau_p}_{\text{\(d\) times}})\
+\ee
+and define a linear operator \(\mcA\) on the space \(\mcH^{\boldtau}\). As we have seen in the previous section, we can approximate the solution of this abstract ODE on \(\mcH^{\boldtau}\) via a Galerkin scheme.
