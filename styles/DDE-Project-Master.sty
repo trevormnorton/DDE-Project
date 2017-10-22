@@ -47,34 +47,42 @@
 \newcommand{\attn}{\color{greenrb}} % attention
 \newcommand{\alert}{\color{rred}} % attention
 
+%% Partial Derivatives
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
 
+%% Roman Numerals
 \newcommand{\RN}[1]{%
   \textup{\uppercase\expandafter{\romannumeral#1}}%
 }
 
+%% Blackboard bold shortcuts
 \newcommand{\R}{\mathbb R}
 \newcommand{\N}{\mathbb N}
 \newcommand{\Nzero}{\mathbb N_0}
 
+%% Mathcal shortcuts
 \newcommand{\mcA}{\mathcal A}
 \newcommand{\mcE}{\mathcal E}
 \newcommand{\mcF}{\mathcal F}
+\newcommand{\mcG}{\mathcal G}
 \newcommand{\mcH}{\mathcal H}
 \newcommand{\mcK}{\mathcal K}
 \newcommand{\mcX}{\mathcal X}
 
 \newcommand{\Lip}{\mathrm{Lip}}
 
+%% Bold symbol shortcuts
 \newcommand{\A}{\boldsymbol{A}}
 \newcommand{\B}{\boldsymbol{B}}
 \newcommand{\x}{\boldsymbol{x}}
 \newcommand{\boldgamma}{\boldsymbol{\gamma}}
 
 
-\newcommand{\boldtau}{\overline{\tau}}
+%\newcommand{\boldtau}{\overline{\tau}}
+\newcommand{\boldtau}{\boldsymbol{\tau}}
 
+%% Inner Products
 \newcommand{\ip}[2]{\langle#1, #2\rangle}
-\newcommand{\iph}[2]{{\ip {#1} {#2} }_{\mcH}}
+\newcommand{\iph}[2]{{\ip {#1} {#2} }_{\mcH^{\boldtau}}}
 \newcommand{\ipx}[2]{{\ip {#1} {#2}} _{\mcX}}
 
